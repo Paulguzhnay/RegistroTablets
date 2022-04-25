@@ -17,5 +17,20 @@ public class TabletON implements TabletONLocal {
 	public List <Tablets> getTablets(){
 		return daoTablet.getList();
 	}
+	
+	public void insertar(Tablets t)throws Exception{
+		daoTablet.insert(t);
+	}
+	public void update(Tablets t)throws Exception{
+		daoTablet.update(t);
+	}
+	
+	public void borrar(int id)throws Exception{
+		daoTablet.delete(id);
+	}
+	
+	public Tablets buscar(int id) {
+		return daoTablet.read(id);
+	}
 
 }

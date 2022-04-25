@@ -13,5 +13,8 @@ import model.Tablets;
 public interface TabletONLocal {
 	
 	public List <Tablets> getTablets();
-
+	public void insertar(Tablets t)throws Exception;
+	public void update(Tablets t)throws Exception;
+	public void borrar(int id)throws Exception;
+	public Tablets buscar(int id);
 }

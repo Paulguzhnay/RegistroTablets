@@ -16,8 +16,6 @@ export class EstudiantewsService {
     console.log(url)
     console.log(estudiante)
     return this.http.post<any>(url,estudiante);
-    /*?nombreE="+nombreE+"&apellidoE="+apellidoE+
-    "&carreraE="+carreraE+"&asignaturaE="+asignaturaE+"&periodoE="+periodoE*/
   }
 
   getEstudiantes(){

@@ -39,9 +39,32 @@ public class MateriaDAO {
 		List<Materia> listado= new ArrayList<Materia>();
 		
 		String jpql ="SELECT mat FROM Materia mat WHERE mat.nombre=?1 ";
-		System.out.println(nombreM +"****************************************");
 		Query query=em.createQuery(jpql, Materia.class);
 		query.setParameter(1, nombreM);
+		listado=query.getResultList();
+		
+		return listado;
+		
+	}
+	
+	public List<Materia> getListMateria(){
+		
+		List<Materia> listado= new ArrayList<Materia>();
+		
+		String jpql ="SELECT mat FROM Materia mat ";
+		Query query=em.createQuery(jpql, Materia.class);
+		listado=query.getResultList();		
+		return listado;
+		
+	}
+
+	public List<Materia> getMateriaDatos(int id){
+		
+		List<Materia> listado= new ArrayList<Materia>();
+		
+		String jpql ="SELECT mat FROM Materia mat WHERE mat.id=?1 ";
+		Query query=em.createQuery(jpql, Materia.class);
+		query.setParameter(1, id);
 		listado=query.getResultList();
 		
 		return listado;

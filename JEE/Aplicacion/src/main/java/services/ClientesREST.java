@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
@@ -19,6 +20,7 @@ import busniess.DocenteONLocal;
 import busniess.EstudianteONLocal;
 import busniess.MateriaONLocal;
 import busniess.UsuarioONLocal;
+
 import busniess.TabletONLocal;
 import model.Docente;
 import model.*;
@@ -94,8 +96,80 @@ public class ClientesREST {
 		
 		return "no felicidades";
 	}
-	
+	//Ingresar Materia
+	@POST
+	@Path("RegistrarM")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public String guardarMateria(Materia mat) {
+			
+		
+		int id  = mat.getDocente().getId();
+		System.out.println(id);	
+		
+		System.out.println("/////////////////////");
+		System.out.println(mat);
+		try {
+				materiaLocal.insertar(mat);
+				return "OK";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+		
+		return "no felicidades";
+	}	
+	
+	
+	//Listar Materia
+	
+	@GET
+	@Path("ListarMateria")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<Materia> getMateria(){
+		List<Materia> materia = materiaLocal.getListMateria();
+		System.out.println(materia);
+		return materia;
+	}
+	
+	
+	//Actualizar Materia
+	@POST
+	@Path("actualizarMateria")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void updateMateria(Materia mat) {
+		System.out.println("hola");
+		System.out.println("***"+mat);
+		System.out.println("hola");
+		materiaLocal.update(mat);
+	}
+	
+	
+	
+	//Eliminar Materia
+	@DELETE
+	@Path("eliminarMateria")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void eliminarMateria(@QueryParam("id") int id ) {
+		System.out.println("hola"+id);
+		materiaLocal.eliminar(id);
+	}
+//Buscar Materia
+	
+	@GET
+	@Path("ListarMaterias")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Materia getMateriaID(@QueryParam("id") int id){
+		Materia materia = materiaLocal.getMateriaDatos(id);
+		System.out.println("-----------------------*********************");
+		System.out.println(materia);
+		return materia;
+	}
+	
 	//JAPON
 	
 	@POST
@@ -126,16 +200,9 @@ public class ClientesREST {
 		return usuarios;
 	}
 	
-	@GET
-	@Path("Tablets")
-	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	public List<Tablets> getTablets(){
-		
-		List<Tablets> tab=new ArrayList<Tablets>();
-		tab=tabletON.getTablets();
-		
-		return tab;
-	}
+	
+	/////////////////////////////////////////////////////////
+	
 	
 	
 	
@@ -206,6 +273,72 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void updateDocente(Docente op) {
 		docentesON.update(op);
+	}
+	
+	////----------------- Tablets----------
+	@GET
+	@Path("Tablets")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<Tablets> getTablets(){
+		
+		List<Tablets> tab=new ArrayList<Tablets>();
+		tab=tabletON.getTablets();
+		
+		return tab;
+	}
+	
+	@GET
+	@Path("BuscarTablet")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Tablets buscar(@QueryParam("id") int id){
+		
+		Tablets tab=new Tablets();
+		tab=tabletON.buscar(id);
+		return tab;
+	}
+	
+	@POST
+	@Path("RegistroTablet")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public String guardarDocente(Tablets t) {
+			System.out.println("********************************");
+			System.out.println(t+"********");
+			try {
+				tabletON.insertar(t);
+				return "OK";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		return "no felicidades";
+	}
+	
+	@POST
+	@Path("actualizarTablet")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void updateDocente(Tablets t) {
+		try {
+			tabletON.update(t);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@DELETE
+	@Path("borrarTablet")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void borrarTablet(@QueryParam("id") int id ){
+		try {
+			tabletON.borrar(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

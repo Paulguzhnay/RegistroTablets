@@ -27,4 +27,21 @@ public class MateriaON implements MateriaONLocal{
 	public List <Materia> getMateria(String nombreM){
 		return daoMateria.getList(nombreM);
 	}
+
+	public  Materia getMateriaDatos(int id){		
+		return daoMateria.read(id);
+	}
+
+	
+	public List <Materia> getListMateria(){
+		return daoMateria.getListMateria();
+	}
+	
+	public void update(Materia mat) {
+		daoMateria.update(mat);
+	}
+	public void eliminar(int id) {
+		daoMateria.delete(id);
+	}
+
 }

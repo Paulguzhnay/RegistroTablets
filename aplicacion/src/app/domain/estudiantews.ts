@@ -1,4 +1,4 @@
-import { Materia } from "./materia";
+import { MateriaWS } from "./materiaws";
 import { Tablet } from "./tablets";
 
 export class EstudianteWS{
@@ -9,7 +9,7 @@ export class EstudianteWS{
     periodoAcademico:string='';
 
 
-    materia: Materia = new Materia;
+    materia: MateriaWS = new MateriaWS;
     tablet: Tablet = new Tablet;
 
 }

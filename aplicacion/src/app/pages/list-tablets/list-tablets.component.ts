@@ -27,4 +27,14 @@ export class ListTabletsComponent implements OnInit {
     this.tablets=this.TabletService.getTablet();
   }
 
+  borrarTablet(id:number){
+    if (window.confirm('¿Estas seguro de querer borrar esta tablet?')) {
+      this.TabletService.borrarTablet(id).subscribe();
+      window.location.reload();
+      
+    }
+    
+
+
+  }
 }

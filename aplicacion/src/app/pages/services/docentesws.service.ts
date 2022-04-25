@@ -21,6 +21,11 @@ export class DocenteswsService {
     return this.http.get<any>(url);
   }
 
+  getMaterias(){
+    let url = "http://localhost:8080/Aplicacion/rs/contactos/ListarMateria";
+    return this.http.get<any>(url);
+  }
+
   update(docente: DocenteWS){
     let url = "http://localhost:8080/Aplicacion/rs/contactos/actualizarDocente";
     return this.http.post<any>(url,docente);

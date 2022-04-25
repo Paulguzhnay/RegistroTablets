@@ -38,7 +38,7 @@ public class tabletDAO {
 		
 		List<Tablets> listado= new ArrayList<Tablets>();
 		
-		String jpql ="SELECT tabl FROM Tablets tabl";
+		String jpql ="SELECT tabl FROM Tablets tabl order by tabl.id ASC";
 		Query query=em.createQuery(jpql, Tablets.class);
 		listado=query.getResultList();
 		

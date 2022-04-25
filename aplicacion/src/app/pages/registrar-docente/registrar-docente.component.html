@@ -123,7 +123,7 @@
                     <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                             <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                Registrar Estudiante
+                                Registrar Docente
                             </div>
                             <div class="p-3">
                                 <form class="w-full">
@@ -166,11 +166,13 @@
                                             <div class="relative">
                                                 <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                                         id="asignatura" name="asignatura" [(ngModel)]="docente.asignatura">
-                                                    <option>Matematica</option>
-                                                    <option>Ecuaciones</option>
-                                                    <option>Telematica</option>
+                                                        <option></option>
+                                                            
+                                                        <option *ngFor="let materia of materias | async" >
+                                                            {{materia.nombre }}
+                                                            </option>
                                                 </select>
-    
+        
                                             </div>
                                         </div>
 
@@ -183,19 +185,19 @@
                                         <div class="md:w-2/3">
                                             <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
                                                     (click)="guardarD()" type="button">
-                                                Guardar
+                                                
+                                                <a href="Actualizar-Docente"> 
+                                                    Guardar
+                                                </a>
                                             </button>
                                         </div>
                                     </div>
+                                    
 
                                 
                                 </form>
-
-                                {{docente.nombre}}
-                                {{docente.apellido}}
-                                {{docente.correo}}
+                                <a>sdad</a>
                                 {{docente.asignatura}}
-
 
 
                             </div>
