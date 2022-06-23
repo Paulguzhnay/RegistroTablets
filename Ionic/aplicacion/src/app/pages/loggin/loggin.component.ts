@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Logeo } from 'src/app/domain/login';
+import { Logeo } from 'src/app/domain/SessionStorageModel';
 import { autentificacion } from 'src/app/domain/singleton';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
@@ -73,7 +73,7 @@ export class LogginComponent implements OnInit {
     this.usuario.logeoUsuario(this.login).subscribe((res: any[]) => {
       this.c = res
       console.log(this.c)
-      if(this.c!=null){
+      if(this.c==true){
 
         //this.aut.setUsuario(this.c);
         this.router.navigate(['Menu-Principal']);

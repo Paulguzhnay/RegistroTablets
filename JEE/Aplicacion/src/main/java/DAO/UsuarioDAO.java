@@ -45,6 +45,35 @@ public class UsuarioDAO {
 		return listado;
 		
 	}
+	public Usuario readAdmin(String correo) {
+		Usuario p=em.find(Usuario.class, correo);
+		return p;
+	}
 	
-
+public List<Usuario> getAdmin(String correo, String password){
+		
+		List<Usuario> listado= new ArrayList<Usuario>();
+		String jpql ="SELECT us FROM Usuario us WHERE us.correo=?1 AND us.password=?2";
+		
+		Query query=em.createQuery(jpql, Usuario.class);
+		query.setParameter(1, correo);
+		query.setParameter(2, password);
+		listado=query.getResultList();
+		System.out.println("listado +"+listado);
+		return listado;
+		
+	}
+	
+/*
+public List<Usuario> getUsuario(String correo){
+	
+	List<Usuario> listado= new ArrayList<Usuario>();
+	String jpql ="SELECT us FROM Usuario us"
+				+ "WHERE us.correo=?1";
+	Query query=em.createQuery(jpql, Usuario.class);
+	query.setParameter(1, correo);
+	listado=query.getResultList();
+	return listado;
+	
+}*/
 }

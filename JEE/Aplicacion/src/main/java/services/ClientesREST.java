@@ -171,7 +171,7 @@ public class ClientesREST {
 	}
 	
 	//JAPON
-	
+	//Registrar Usuarios colaboradores
 	@POST
 	@Path("RegistroU")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
@@ -179,9 +179,10 @@ public class ClientesREST {
 	public String guardarUsuario(Usuario usuario) {
 			
 			System.out.println(usuario);
+			System.out.println("Entro en el POST PARA GUARDAR");
 			try {
 				usuarioLocal.insertar(usuario);
-				System.out.println("Entro en el POST PARA GUARDAR");
+
 				return "OK";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -192,13 +193,29 @@ public class ClientesREST {
 		return "no felicidades";
 	}
 	
+	//tomar los valores de correo y password
+	
 	@GET
+	@Path("Login")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	public List<Usuario> getUsuarios(){
-		List<Usuario> usuarios = usuarioLocal.getClientes();
-		System.out.println(usuarios);
-		return usuarios;
+	public boolean getUsuarios(@QueryParam("correo")String correou, @QueryParam("password")String passwordu){
+		List<Usuario> usuarios = usuarioLocal.getUsuarios(correou, passwordu);
+		System.out.println("CONRREO "+correou);
+		System.out.println("password "+passwordu);
+		System.out.println(usuarios.size());
+		boolean bandera=false;
+		if (usuarios.size()==1) {
+			bandera=true;
+			return bandera;
+		}
+		
+		System.out.println("--------------------"+usuarios);
+		
+		return bandera;
 	}
+	
+	
+	
 	
 	
 	/////////////////////////////////////////////////////////

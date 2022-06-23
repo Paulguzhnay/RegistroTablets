@@ -29,6 +29,8 @@ public class Usuario implements Serializable{
 	String rol;
 	@Column(name = "usu_cargo")
 	String cargo;
+	@Column(name = "usu_password")
+	String password;
 	
 	// Getters y Setters
 	public int getId() {
@@ -67,11 +69,20 @@ public class Usuario implements Serializable{
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", rol="
-				+ rol + ", cargo=" + cargo + "]";
+				+ rol + ", cargo=" + cargo + ", password=" + password + "]";
 	}
+
+
 	
 	
 	

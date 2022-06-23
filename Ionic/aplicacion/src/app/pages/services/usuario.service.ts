@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Logeo } from 'src/app/domain/login';
+import { Logeo } from 'src/app/domain/SessionStorageModel';
 import { UsuarioWS } from 'src/app/domain/usuariows';
 
 @Injectable({
@@ -23,7 +23,9 @@ export class UsuarioService {
   logeoUsuario(logdatos : Logeo){
     let url="http://localhost:8080/Aplicacion/rs/contactos/Login?correo="+logdatos.correo +"&password="+logdatos.password;
     console.log(url)
+    console.log("--"+this.http.get<any>(url));
     return this.http.get<any>(url);
+
 
   }
 

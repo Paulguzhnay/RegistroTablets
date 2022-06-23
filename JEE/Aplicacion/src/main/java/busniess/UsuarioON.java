@@ -1,5 +1,6 @@
 package busniess;
 
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,8 +20,8 @@ public class UsuarioON implements UsuarioONLocal {
 	private UsuarioDAO  daousuario;
 	
 	public void insertar(Usuario u) throws Exception  {
-		System.out.println("USUARIO "+u);
 		daousuario.insert(u);
+	
 	}
 	
 	/*public void eliminar(int id) throws Exception{
@@ -41,6 +42,30 @@ public class UsuarioON implements UsuarioONLocal {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	public List <Usuario> getUsuarios(String correo, String password){
+		return daousuario.getAdmin(correo, password);
+	}
+	
+	/*public Usuario buscarUsuario(String correo, String password) {
+		List<Usuario> u = daousuario.getAdmin(correo, password);
+		List<Usuario>usuarios = daousuario.getUsuario(correo);
+		
+ 
+			//condicional para devolcer un objeto persona
+			//siempre y cunedo los datos correspondan
+		
+			if(u != null & u.get(0).getPassword().equals(password)) {
+				//validacion de los 2 campos
+				return (Usuario) u;	
+			}		
+			return null;
+		}
+	*/
+	
+	
+	
 	
 }
 	
