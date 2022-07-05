@@ -1,0 +1,85 @@
+<!-- logeo(){
+    
+    console.log(this.login.correo)
+    console.log(this.login.password)
+    
+    if(this.login.correo == "admin" && this.login.password =="admin"){
+      console.log("Es valido")
+      this.router.navigate(['Menu-Principal']);
+    }else{
+      console.log("NO encontro nada")
+      this.router.navigate(['Loggin-User']);
+
+    }
+
+  }
+
+  /*
+  cargarUsuarios(){
+    console.log(this.loginservice.getDatos(this.datos));
+  
+    this.loginservice.getDatos(this.datos).subscribe((res: any[]) => this.c = res);
+  
+  
+  
+    // this.c = this.contactoService.getDatos(this.contacto);
+     console.log("-------------");
+      console.log(this.c);
+      console.log("-------------");
+  
+     //this.contactos = this.contactoService.getClientes();
+      if(this.c!=nu…
+[16:19, 4/5/2022] Christian Japon: 6971
+[17:05, 4/5/2022] Christian Japon: -->
+
+
+<ion-content>
+  <head>
+    <title>Login | Tailwind Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="loggin.component.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous">
+      <!--
+    <style>
+  
+    .login{
+     background: url('login.jpeg') 
+    }
+    </style> 
+  -->
+  </head>
+  
+  <body class="h-screen font-sans login bg-cover" >
+  <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+    <div class="w-full max-w-lg">
+      <div class="leading-loose">
+        <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+          <p class="text-gray-800 font-medium text-center text-lg font-bold">Login</p>
+          <div class="">
+            <label class="block text-sm text-gray-00" for="username">Mail</label>
+            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="username" name="username" type="text" required="" placeholder="User Name" aria-label="correo" [(ngModel)]="login.correo" />
+          <!--Imput para tomar dato del username-->
+          </div>
+          <div class="mt-2">
+            <label class="block text-sm text-gray-600" for="password">Password</label>
+            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="password" name="password" type="text" required="" placeholder="***" aria-label="password" [(ngModel)]="login.password" />
+                <!--Imput para tomar dato de la contraseña-->
+          </div>
+          <div class="mt-4 items-center justify-between">
+        
+           <button (click)="logeo()" class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Iniciar Sesion</button>
+        <!--boton de login-->
+            
+          </div>
+          
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  </body>
+  
+  </ion-content>
+  
