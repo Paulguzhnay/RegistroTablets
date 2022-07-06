@@ -23,14 +23,7 @@
                   </div>
                   <div class="p-1 flex flex-row items-center">
           
-                      <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r">
-                          <ul class="list-reset">
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">My account</a></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Notifications</a></li>
-                            <li><hr class="border-t mx-2 border-grey-ligght"></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
-                          </ul>
-                      </div>
+
                   </div>
               </div>
           </ion-header>
@@ -68,8 +61,8 @@
                                           </label>
                                           <input type="date" id="fecha" name="fecha"
                                           value="2022-07-01"
-                                          min="2022-07-01" max="2040-12-31">
-                                          
+                                          min="2022-07-01" max="2040-12-31" [(ngModel)]="tablet.fecha">
+                                          {{tablet.fecha}}
                                       </div>
                                       <br>
 
@@ -81,12 +74,18 @@
                                                   Asignatura
                                               </label>
                                               <div class="relative">
-                                                  
-                                                  <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          id="carrera" name="carrera" >
-                                                  </select>
-
-                                              </div>
+                                                <select
+                                                    class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                    id="asignatura" name="asignatura" [(ngModel)]="tablet.materia.id">
+                                                    <option></option>
+    
+                                                    <option *ngFor="let materia of materias | async"
+                                                    [value]="materia.id">
+                                                        {{materia.nombre }}
+                                                    </option>
+                                                </select>
+                                                {{tablet.materia.id}}
+                                            </div>
                                           </div>
                                           <br>
 <!---------------------------------------------------------------------------------------------------->    
@@ -96,11 +95,16 @@
                                                   Docente
                                               </label>
                                               <div class="relative">
-                                                  <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                          id="carrera" name="carrera" >
-                                                  </select>
-
-                                              </div>
+                                                <select
+                                                    class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                    id="apellido" name="apellido" [(ngModel)]="tablet.docente.id">
+                                                    <option *ngFor="let docente of docentes | async"
+                                                        [value]="docente.id">
+                                                        {{docente.nombre +" "+ docente.apellido }}
+                                                    </option>
+                                                </select>
+                                                {{tablet.docente.id}}
+                                            </div>
                                           </div>
                                           <br>
 <!---------------------------------------------------------------------------------------------------->    
@@ -149,12 +153,16 @@
                                               </label> 
                                           </div>
                                           <br>
-
+                                          <br>
+                                          <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event)">
+                                          <ion-button expand="full" (click)="captureImage()">
+                                            <ion-icon slot="start" name="camera"></ion-icon>
+                                            Capturar & Escanear QR Celular
+                                          </ion-button>
                                         
-                                        
-                                          <ion-button expand="medium" (click)="escanear()">
-                                            <ion-icon slot="Escanear" name="qr-scanner"></ion-icon>    
-                                            Escanear Código QR
+                                          <ion-button expand="full" (click)="escanear()">
+                                            <ion-icon slot="Escanear" name="scan-outline"></ion-icon>    
+                                            Escanear Código QR Computadora
                                           </ion-button>
                                         
                                           <ion-button expand="full" (click)="reset()" color="warming" *ngIf="resultadoEscaner">
@@ -162,7 +170,14 @@
                                             Escanear Otra Vez
                                           </ion-button>
                                         
-                                          <video #video [hidden]="!escanerActivo" width="100%"></video>
+                                          <ion-row class="ion-align-items-center">
+                                            <ion-col size="2"></ion-col>
+                                            <ion-col size="8">
+                                              <!-- Shows our camera stream -->
+                                              <video #video [hidden]="!escanerActivo" width="100%"></video>
+                                            </ion-col>
+                                            <ion-col size="2"></ion-col>
+                                          </ion-row>
                                         
                                           <canvas #canvas hidden></canvas>
                                         

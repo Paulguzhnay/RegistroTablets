@@ -48,5 +48,13 @@ export class ListTabletwsService {
  console.log(url)
  return this.http.delete(url);
   }
+  buscarEst(user:number):Observable<Tablet>{
+
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/estudiantesT?id="
+   let url=uri+user
+   console.log(url)
+   return this.http.get<Tablet>(url);
+ }
+  
   
 }

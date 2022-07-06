@@ -6,9 +6,9 @@ import { LogginPage } from './pages/loggin/loggin.page';
 const routes: Routes = [
   {
     path: '',
-    component: LogginPage,
-    //redirectTo: 'MenuPrincipalPage',
-    //pathMatch: 'full'
+    // component: LogginPage,
+    redirectTo: 'loggin',
+    pathMatch: 'full'
 
   },
 

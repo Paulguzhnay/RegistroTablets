@@ -1,30 +1,67 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { RTablet } from 'src/app/domain/RegTablet';
+import { DocenteWS } from 'src/app/domain/docentews';
+import { MateriaWS } from 'src/app/domain/materiaws';
+import { DocenteswsService } from '../services/docentesws.service';
+import { MateriawsService } from '../services/materiaws.service';
+import {  ListTabletwsService } from '../services/list-tabletws.service';
+
 import jsQR from 'jsqr';
+import { EstudianteWS } from 'src/app/domain/estudiantews';
 @Component({
   selector: 'app-registrar-prestamo',
   templateUrl: './registrar-prestamo.page.html',
   styleUrls: ['./registrar-prestamo.page.scss'],
 })
 export class RegistrarPrestamoPage{
+  
+  tablet: RTablet = new RTablet();
+  docente:DocenteWS = new DocenteWS();
+  materia:MateriaWS = new MateriaWS();
+  estudiante:EstudianteWS = new EstudianteWS();
+  materias:any;
+  docentes: any;
+  estTablet:any;
+  cargarMaterias(): void{
+    this.materias = this.docenteWS.getMaterias();
+    console.log("Hola");
+    console.log("Hola2"+this.docenteWS.getMaterias());
+  }
+  cargarDocentes(): void{
+    this.docentes = this.materiaWS.getDocentes();
+    console.log("Hola");
+    console.log("Hola2"+this.materiaWS.getDocentes());
+  }
+  ngOnInit(): void {
+    this.cargarMaterias()
+    this.cargarDocentes()
+  }
+
+  buscarEstTablet(){
+    this.estTablet=this.tabletWS.buscarEst(this.materia.id);
+    console.log(this.estTablet);
+  }
+
+
   escanerActivo = false;
   resultadoEscaner = null;
   @ViewChild('video', {static: false}) video: ElementRef;
-  @ViewChild('canvas', {static: false}) canvas: ElementRef;  
+  @ViewChild('canvas', {static: false}) canvas: ElementRef;
+  @ViewChild('fileinput', { static: false }) fileinput: ElementRef;
+
   videoElements: any;
   canvasElements: any;
   canvasContext: any;
   loading: HTMLIonLoadingElement;
-  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController ) {} 
+  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
 
-  ngOnInit(){
-    
-  }
-  ngAfterViewInit(): void{
+  ngAfterViewInit(){
     this.videoElements = this.video.nativeElement;
     this.canvasElements = this.canvas.nativeElement;
     this.canvasContext = this.canvasElements.getContext('2d');
   }
+
   async escanear(){
     console.log("Escanear");
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -53,7 +90,7 @@ export class RegistrarPrestamoPage{
       this.canvasContext.drawImage(this.videoElements, 0, 0, this.canvasElements.width, this.canvasElements.height);
 
       const imageData = this.canvasContext.getImageData(0, 0, this.canvasElements.width, this.canvasElements.height);
-
+      
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
@@ -80,8 +117,11 @@ export class RegistrarPrestamoPage{
   }
 
   reset(){
+    this.resultadoEscaner = null;
+    this.detener();
 
   }
+
   async visualizarQrToast(){
     const toast = await this.toasstCtrl.create({
       message: 'Open ${this.resultadoEscaner}?',
@@ -96,6 +136,32 @@ export class RegistrarPrestamoPage{
       ]
     });
     toast.present();
+  }
+
+  captureImage() {
+    this.fileinput?.nativeElement.click();
+  }
+   
+  handleFile(event: any) {
+    let file: any = <HTMLInputElement>event.target.files
+    if (!file?.length) { return; }
+    file = file[0];
+   
+    var img = new Image();
+    img.onload = () => {
+
+      this.canvasContext.drawImage(img, 0, 0, this.canvasElements.width, this.canvasElements.height);
+      const imageData = this.canvasContext.getImageData(0, 0, this.canvasElements.width, this.canvasElements.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height, {
+        inversionAttempts: 'dontInvert'
+      });
+   
+      if (code) {
+        this.resultadoEscaner = code.data;
+        this.visualizarQrToast();
+      }
+    };
+    img.src = URL.createObjectURL(file);
   }
 
 

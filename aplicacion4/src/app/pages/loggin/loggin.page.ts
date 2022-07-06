@@ -20,8 +20,15 @@ export class  LogginPage implements OnInit {
   ionViewWillEnter(){
     this.menu.enable(false);
   }
+
+  ionViewDidEnter(){
+    this.login.password="";
+    this.login.correo="";
+  }
  
   ngOnInit(): void {
+    this.login.password="";
+    this.login.correo="";
   }
 
 
@@ -34,95 +41,19 @@ export class  LogginPage implements OnInit {
     console.log('-----/////**--')
     console.log(this.usuario.logeoUsuario)
     console.log('----*//*/*----')
-  /*  
-    if (this.login.correo==""||this.login.correo=="") {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      })
-    }else if(this.login.correo == "cjaponc@ieee.org" && this.login.password == "abc123"){
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'La tablet ha sido creada exitosamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      this.router.navigate(['Menu-Principal']);
-    }else if(this.login.correo == "japon@gmail.com" && this.login.password == "iloveu"){
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'La tablet ha sido creada exitosamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      this.router.navigate(['Menu-Principal']);
-    }else if(this.login.correo == "ejemplo@gmail.com" && this.login.password == "ejemplo123"){
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'La tablet ha sido creada exitosamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      this.router.navigate(['Menu-Principal']);
-    }else{
-      this.router.navigate(['Loggin-User']);
-
-    }
-*/
+    
 
     this.usuario.logeoUsuario(this.login).subscribe((res: any[]) => {
       this.c = res
       console.log(this.c)
-      if(this.c==true){
 
-        //this.aut.setUsuario(this.c);
-        this.router.navigate(['menu-principal']);
+     
+      if(this.c==true){
+        this.router.navigate(['/menu-principal']);
       }
     });
 
-   
-    
-
-   // this.usuario.logeoUsuario(this.login.correo,this.login.password);
-    
-    /*
-    if(this.login.correo == this.usuario.logeoUsuario()){
-      console.log("Es valido")
-     // this.router.navigate(['Menu-Principal']);
-    }else{
-      console.log("NO encontro nada")
-     // this.router.navigate(['Loggin-User']);
-
-    }*/
 
   }
-
-  /*
-  cargarUsuarios(){
-    console.log(this.loginservice.getDatos(this.datos));
-  
-    this.loginservice.getDatos(this.datos).subscribe((res: any[]) => this.c = res);
-  
-  
-  
-    // this.c = this.contactoService.getDatos(this.contacto);
-     console.log("-------------");
-      console.log(this.c);
-      console.log("-------------");
-  
-     //this.contactos = this.contactoService.getClientes();
-      if(this.c!=null){
-        //this.pantallaPrincipal.colocarUser(this.c);
-        this.aut.setUsuario(this.c);
-        this.router.navigate(['Menu-Principal']);
-        
-      }
-
-    }*/
-
 
 }
