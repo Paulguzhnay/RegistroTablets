@@ -31,4 +31,8 @@ public class EstudianteON implements EstudianteONLocal{
 		return daoestudiante.getList();
 	}
 	
+	public List<Estudiante> getEstudiantesR(int id){
+		return daoestudiante.getListEst(id);
+	}
+	
 }

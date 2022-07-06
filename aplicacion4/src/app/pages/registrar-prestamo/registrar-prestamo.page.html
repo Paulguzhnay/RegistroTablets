@@ -107,29 +107,44 @@
                                             </div>
                                           </div>
                                           <br>
+                                          <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                                          (click)="buscarEstTablet()" type="button">
+                                         Cargar Estudiantes
+                                 </button>      
+                                                                     
 <!---------------------------------------------------------------------------------------------------->    
                   <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                      <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                    <br>
+                    <br>  
+                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
                           for="carrera">
                           Nombre del Estudiante
                       </label>
                       <div class="relative">
-                          <select class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                  id="carrera" name="carrera" >
-                          </select>
+                        <select
+                            class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                            id="estudiante" name="estudiante" [(ngModel)]="tablet.estudiante.id">
+                            <option></option>
 
-                      </div>
+                            <option *ngFor="let estudiante of estudiantes "
+                            [value]="estudiante.id">
+                                {{estudiante.nombre + " "+estudiante.apellido}}
+                            </option>
+                        </select>
+                        {{tablet.estudiante.id}}
+                    </div>
                   </div>
                   <br>
 <!---------------------------------------------------------------------------------------------------->    
 
                                           <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                                               <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
-                                                     for="carrera">
+                                                     for="observaciones">
                                                   Observaciones
                                               </label>
-                                              <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+                                              <textarea id="observacion" name="observacion" rows="4" cols="50" [(ngModel)]="tablet.observaciones"></textarea>
                                               <br>
+                                              {{tablet.observaciones}}
                                           </div>
                                           <br>
 <!---------------------------------------------------------------------------------------------------->    
@@ -140,17 +155,19 @@
                                                   <h2>Estado</h2>
                                               </label>
                                               <label>
-                                                  <input type="radio" name="disponible" value="disponible"> Disponible <br>
-                                                  <input type="radio" name="Ndisponible" value="Ndisponible"> No Disponible<br>                                                    
-                                                  <input type="radio" name="prestado" value="prestado"> Prestado<br>
+                                                  <input type="radio" name="disponible" value="disponible" [(ngModel)]="tablet.estado"> Disponible <br>
+                                                  <input type="radio" name="Ndisponible" value="No disponible"  [(ngModel)]="tablet.estado"> No Disponible<br>                                                    
+                                                  <input type="radio" name="prestado" value="prestado"  [(ngModel)]="tablet.estado"> Prestado<br>
                                                   <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="carrera">
                                                       <br>
                                                       <br>
                                                       <br>
                                                       <h2>¿A quien?</h2>
                                               </label>
-                                                  <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
-                                              </label> 
+                                                  <textarea id="estadoTxt" name="estadoTxt" rows="4" cols="50"  [(ngModel)]="tablet.estadoTxt"></textarea>
+                                              </label>
+                                              {{ tablet.estado}}
+                                              {{ tablet.estadoTxt}} 
                                           </div>
                                           <br>
                                           <br>
@@ -200,10 +217,10 @@
                                           <div class="md:w-1/3"></div>
                                           <div class="md:w-2/3">
                                               <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                                                       type="button">
-                                                  <a href="Actualizar-Estudiante"> 
+                                              (click)="guardarRT()" type="button">
+
                                                       Guardar
-                                                  </a>
+
                                               </button>
                                           </div>
                                       </div>

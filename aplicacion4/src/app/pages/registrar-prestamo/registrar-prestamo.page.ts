@@ -15,6 +15,7 @@ import { EstudianteWS } from 'src/app/domain/estudiantews';
   styleUrls: ['./registrar-prestamo.page.scss'],
 })
 export class RegistrarPrestamoPage{
+  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
   
   tablet: RTablet = new RTablet();
   docente:DocenteWS = new DocenteWS();
@@ -23,15 +24,14 @@ export class RegistrarPrestamoPage{
   materias:any;
   docentes: any;
   estTablet:any;
+  estudiantes:any;
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
-    console.log("Hola");
-    console.log("Hola2"+this.docenteWS.getMaterias());
+
   }
   cargarDocentes(): void{
     this.docentes = this.materiaWS.getDocentes();
-    console.log("Hola");
-    console.log("Hola2"+this.materiaWS.getDocentes());
+
   }
   ngOnInit(): void {
     this.cargarMaterias()
@@ -39,10 +39,41 @@ export class RegistrarPrestamoPage{
   }
 
   buscarEstTablet(){
-    this.estTablet=this.tabletWS.buscarEst(this.materia.id);
-    console.log(this.estTablet);
-  }
+    this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
+        this.estudiantes = data;
+        console.log(this.estudiantes);
 
+    });
+
+  }
+  guardarRT(){
+console.log(this.tablet)
+/*    if (this.materia.nombre==""||this.materia.docente.id==0) {
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Datos Vacios',
+      })
+    } 
+    
+    else {*/
+    this.tabletWS.insertarTabletR(this.tablet).subscribe(data=>{
+      console.log(this.tablet)
+      console.log(data)
+    })   
+/*      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'La materia ha sido creada exitosamente',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.materia.nombre=''
+      this.materia.docente.id=0    
+    }*/
+  
+  }
 
   escanerActivo = false;
   resultadoEscaner = null;
@@ -54,7 +85,6 @@ export class RegistrarPrestamoPage{
   canvasElements: any;
   canvasContext: any;
   loading: HTMLIonLoadingElement;
-  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
 
   ngAfterViewInit(){
     this.videoElements = this.video.nativeElement;

@@ -80,9 +80,9 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public String guardarEstudiante(Estudiante est) {
-		
+			System.out.println("----"+est.toString());
 			listMateria=materiaLocal.getMateria(est.getAsignatura());
-			m.setId(listMateria.get(0).getId());;
+			m.setId(listMateria.get(0).getId());
 			m.getId();
 			est.setMateria(m);
 			try {
@@ -199,9 +199,10 @@ public class ClientesREST {
 	@Path("Login")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public boolean getUsuarios(@QueryParam("correo")String correou, @QueryParam("password")String passwordu){
-		List<Usuario> usuarios = usuarioLocal.getUsuarios(correou, passwordu);
 		System.out.println("CONRREO "+correou);
 		System.out.println("password "+passwordu);
+		List<Usuario> usuarios = usuarioLocal.getUsuarios(correou, passwordu);
+		
 		System.out.println(usuarios.size());
 		boolean bandera=false;
 		if (usuarios.size()==1) {
@@ -356,6 +357,34 @@ public class ClientesREST {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	//-------------------------------
+	@GET
+	@Path("estudiantesT")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<Estudiante> getEstudiantesM(@QueryParam("id") int id){
+		System.out.println("****************** "+id);
+		return estudiantesON.getEstudiantesR(id);
+	}
+	
+	@POST
+	@Path("InsertarTR")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public String guardarRegistroEstTablet(TabletsR tabR) {
+		
+			try {
+				System.out.println("*********"+tabR.toString());
+				tabletON.insertar(tabR);
+				return "OK";
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		return "no felicidades";
 	}
 }
 

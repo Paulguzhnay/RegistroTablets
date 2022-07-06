@@ -35,14 +35,19 @@ public class EstudianteDAO {
 	}
 	
 	public List<Estudiante> getList(){
-		
 		List<Estudiante> listado= new ArrayList<Estudiante>();
-		
 		String jpql ="SELECT est FROM Estudiante est";
 		Query query=em.createQuery(jpql, Estudiante.class);
 		listado=query.getResultList();
-		
-		return listado;
-		
+		return listado;	
+	}
+
+	public List<Estudiante> getListEst(int id){
+		List<Estudiante> listado= new ArrayList<Estudiante>();
+		String jpql ="SELECT est FROM Estudiante est WHERE est.materia.id=?1";
+		Query query=em.createQuery(jpql, Estudiante.class);
+		query.setParameter(1, id);
+		listado=query.getResultList();
+		return listado;	
 	}
 }

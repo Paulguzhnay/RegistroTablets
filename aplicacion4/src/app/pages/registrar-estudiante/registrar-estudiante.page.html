@@ -132,16 +132,18 @@
                                                       </select>
           
                                               </div>-->
-                                        <div class="relative">
-                                            <select
-                                                class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                id="asignatura" name="asignatura" [(ngModel)]="estudiante.asignatura">
-                                                <option>Matematica</option>
-                                                <option>Ecuaciones</option>
-                                                <option>Telematica</option>
-                                            </select>
-
-                                        </div>
+                                              <div class="relative">
+                                                <select
+                                                    class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                                    id="asignatura" name="asignatura" [(ngModel)]="estudiante.asignatura">
+                                                    <option></option>
+    
+                                                    <option *ngFor="let materia of materias | async">
+                                                        {{materia.nombre }}
+                                                    </option>
+                                                </select>
+    
+                                            </div>
                                     </div>
 
                                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">

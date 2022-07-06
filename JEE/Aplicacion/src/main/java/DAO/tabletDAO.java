@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.Tablets;
+import model.TabletsR;
 
 @Stateless
 public class tabletDAO {
@@ -19,7 +20,10 @@ public class tabletDAO {
 	public void insert(Tablets tabl) {
 		em.persist(tabl);
 	}
-	
+//------------------------------------------------
+	public void insertTR(TabletsR tablR) {
+		em.persist(tablR);
+	}
 	public void update(Tablets  tabl) {
 		em.merge(tabl);
 	}
@@ -35,17 +39,14 @@ public class tabletDAO {
 	}
 	
 	public List<Tablets> getList(){
-		
 		List<Tablets> listado= new ArrayList<Tablets>();
-		
 		String jpql ="SELECT tabl FROM Tablets tabl order by tabl.id ASC";
 		Query query=em.createQuery(jpql, Tablets.class);
 		listado=query.getResultList();
-		
-		return listado;
-		
+		return listado;	
 	}
-	
+
+
 /*public List<Tablets> getListCuentas(String cedula){
 		
 		List<Tablets> listado= new ArrayList<Tablets>();

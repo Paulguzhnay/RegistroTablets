@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Tablet } from 'src/app/domain/tablets';
+import { RTablet } from 'src/app/domain/RegTablet';
 
 
 @Injectable({
@@ -56,5 +57,10 @@ export class ListTabletwsService {
    return this.http.get<Tablet>(url);
  }
   
-  
+ insertarTabletR(tabletR:RTablet):Observable<any>{
+  let url="http://localhost:8080/Aplicacion/rs/contactos/InsertarTR";
+  console.log(url)
+  console.log(tabletR)
+  return this.http.post<any>(url,tabletR);
+}
 }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { registrarE } from 'src/app/domain/estudiante';
 import { EstudianteWS } from 'src/app/domain/estudiantews';
 import { EstudiantewsService } from '../services/estudiantews.service';
+import { MateriaWS } from 'src/app/domain/materiaws';
+import { DocenteswsService } from '../services/docentesws.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registrar-estudiante',
@@ -11,14 +13,20 @@ import Swal from 'sweetalert2';
 })
 export class RegistrarEstudiantePage implements OnInit {
   estudiante: EstudianteWS = new EstudianteWS();
+  materia:MateriaWS = new MateriaWS();
+  materias:any;
 
 
-
-  constructor(private estudianteWS: EstudiantewsService) { }
+  constructor(private estudianteWS: EstudiantewsService,private docenteWS: DocenteswsService) { }
 
   ngOnInit(): void {
+    this.cargarMaterias();
   }
-
+  cargarMaterias(): void{
+    this.materias = this.docenteWS.getMaterias();
+    console.log("Hola");
+    console.log("Hola2"+this.docenteWS.getMaterias());
+  }
   guardar(){
     
     if (this.estudiante.nombre==""||this.estudiante.apellido==""||this.estudiante.asignatura==""||this.estudiante.carrera==""||this.estudiante.periodoAcademico=="") {

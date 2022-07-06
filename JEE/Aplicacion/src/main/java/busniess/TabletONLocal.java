@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import DAO.tabletDAO;
 import model.Tablets;
+import model.TabletsR;
 
 @Local
 public interface TabletONLocal {
@@ -17,4 +18,5 @@ public interface TabletONLocal {
 	public void update(Tablets t)throws Exception;
 	public void borrar(int id)throws Exception;
 	public Tablets buscar(int id);
+	public void insertar(TabletsR tR)throws Exception;
 }
