@@ -19,4 +19,6 @@ public interface TabletONLocal {
 	public void borrar(int id)throws Exception;
 	public Tablets buscar(int id);
 	public void insertar(TabletsR tR)throws Exception;
+	public void updateR(TabletsR tR)throws Exception;
+	public Tablets verificar(String codigo);
 }

@@ -28,5 +28,13 @@ public class DocenteON implements DocenteONLocal{
 	}
 	
 	
+	public void delete(int id) {
+		daodocente.delete(id);
+	}
+	
+	public Docente buscarDocente(int id) {
+		return daodocente.read(id);
+	}
+	
 	
 }

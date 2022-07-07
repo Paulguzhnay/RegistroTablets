@@ -57,20 +57,32 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrar-usuario/registrar-usuario.module').then( m => m.RegistrarUsuarioPageModule)
   },
   {
-    path: 'update-docente',
+    path: 'update-docente/:id',
     loadChildren: () => import('./pages/update-docente/update-docente.module').then( m => m.UpdateDocentePageModule)
   },
   {
-    path: 'update-estudiantes',
+    path: 'update-estudiantes/:id',
     loadChildren: () => import('./pages/update-estudiantes/update-estudiantes.module').then( m => m.UpdateEstudiantesPageModule)
   },
   {
-    path: 'update-materia',
+    path: 'update-materia/:id',
     loadChildren: () => import('./pages/update-materia/update-materia.module').then( m => m.UpdateMateriaPageModule)
   },
   {
     path: 'update-tablets/:id',
     loadChildren: () => import('./pages/update-tablets/update-tablets.module').then( m => m.UpdateTabletsPageModule)
+  },
+  {
+    path: 'listar-estudiantes',
+    loadChildren: () => import('./pages/listar-estudiantes/listar-estudiantes.module').then( m => m.ListarEstudiantesPageModule)
+  },
+  {
+    path: 'listar-docentes',
+    loadChildren: () => import('./pages/listar-docentes/listar-docentes.module').then( m => m.ListarDocentesPageModule)
+  },
+  {
+    path: 'devolver-prestamo',
+    loadChildren: () => import('./pages/devolver-prestamo/devolver-prestamo.module').then( m => m.DevolverPrestamoPageModule)
   }
  
 ];

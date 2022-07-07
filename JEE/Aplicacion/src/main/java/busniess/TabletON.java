@@ -29,13 +29,19 @@ public class TabletON implements TabletONLocal {
 	public void update(Tablets t)throws Exception{
 		daoTablet.update(t);
 	}
-	
+	public void updateR(TabletsR tR)throws Exception{
+		daoTablet.updateR(tR);
+	}	
 	public void borrar(int id)throws Exception{
 		daoTablet.delete(id);
 	}
 	
 	public Tablets buscar(int id) {
 		return daoTablet.read(id);
+	}
+	
+	public Tablets verificar(String codigo) {
+		return daoTablet.read2(codigo);
 	}
 
 }

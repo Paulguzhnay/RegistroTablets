@@ -26,6 +26,9 @@ public class EstudianteON implements EstudianteONLocal{
 		daoestudiante.update(op);
 	}
 	
+	public void delete(int id) {
+		daoestudiante.delete(id);
+	}
 
 	public List<Estudiante> getEstudiantes(){
 		return daoestudiante.getList();
@@ -33,6 +36,10 @@ public class EstudianteON implements EstudianteONLocal{
 	
 	public List<Estudiante> getEstudiantesR(int id){
 		return daoestudiante.getListEst(id);
+	}
+	
+	public Estudiante buscarEstudiante(int id) {
+		return daoestudiante.read(id);
 	}
 	
 }

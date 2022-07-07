@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import model.Estudiante;
 import model.Tablets;
 import model.TabletsR;
 
@@ -24,10 +25,14 @@ public class tabletDAO {
 	public void insertTR(TabletsR tablR) {
 		em.persist(tablR);
 	}
+	//---------------------------------------------
 	public void update(Tablets  tabl) {
 		em.merge(tabl);
 	}
-	
+//----------------
+	public void updateR(TabletsR  tablR) {
+		em.merge(tablR);
+	}
 	public Tablets  read(int id) {
 		Tablets  tabl=em.find(Tablets.class, id);
 		return(tabl);
@@ -44,6 +49,17 @@ public class tabletDAO {
 		Query query=em.createQuery(jpql, Tablets.class);
 		listado=query.getResultList();
 		return listado;	
+	}
+	
+	public Tablets read2(String codigo) {
+		List<Tablets> listado= new ArrayList<Tablets>();
+		String jpql ="SELECT tab FROM Tablets tab WHERE tab.codigo=?1";
+		Query query=em.createQuery(jpql, Tablets.class);
+		query.setParameter(1, codigo);
+		listado=query.getResultList();
+		System.out.println(listado.toString());
+		Tablets t = listado.get(0);
+		return t;	
 	}
 
 

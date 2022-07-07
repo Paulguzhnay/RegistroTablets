@@ -9,6 +9,8 @@ import {  ListTabletwsService } from '../services/list-tabletws.service';
 
 import jsQR from 'jsqr';
 import { EstudianteWS } from 'src/app/domain/estudiantews';
+import { Condition } from 'selenium-webdriver';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registrar-prestamo',
   templateUrl: './registrar-prestamo.page.html',
@@ -18,6 +20,7 @@ export class RegistrarPrestamoPage{
   constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
   
   tablet: RTablet = new RTablet();
+  tablet2: any;
   docente:DocenteWS = new DocenteWS();
   materia:MateriaWS = new MateriaWS();
   estudiante:EstudianteWS = new EstudianteWS();
@@ -27,11 +30,9 @@ export class RegistrarPrestamoPage{
   estudiantes:any;
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
-
   }
   cargarDocentes(): void{
     this.docentes = this.materiaWS.getDocentes();
-
   }
   ngOnInit(): void {
     this.cargarMaterias()
@@ -42,13 +43,12 @@ export class RegistrarPrestamoPage{
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
         console.log(this.estudiantes);
-
     });
 
   }
   guardarRT(){
-console.log(this.tablet)
-/*    if (this.materia.nombre==""||this.materia.docente.id==0) {
+    console.log(this.tablet)
+    /*if (this.materia.nombre==""||this.materia.docente.id==0) {
       
       Swal.fire({
         icon: 'error',
@@ -153,19 +153,7 @@ console.log(this.tablet)
   }
 
   async visualizarQrToast(){
-    const toast = await this.toasstCtrl.create({
-      message: 'Open ${this.resultadoEscaner}?',
-      position: 'top',
-      buttons: [
-        {
-          text: "Open",
-          handler: () => {
-            window.open(this.resultadoEscaner, '_system', 'location=yes')
-          }
-        }
-      ]
-    });
-    toast.present();
+    this.verificar();
   }
 
   captureImage() {
@@ -192,6 +180,47 @@ console.log(this.tablet)
       }
     };
     img.src = URL.createObjectURL(file);
+  }
+
+  verificar(){
+    const codigo = this.resultadoEscaner.split(" ");
+    console.log(codigo.length)
+    console.log(codigo[4])
+    if (codigo.length == 5){
+      this.tablet2 = this.tabletWS.verificarTablet(codigo[4]);
+      console.log("hola",this.tablet2)
+      if(this.tablet2 == null){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error',
+          text: 'Tablet no registrada',
+          heightAuto: false,
+          timer:8500
+        })
+      }else{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Informacion de la Tablet',
+          text: this.resultadoEscaner,
+          heightAuto: false,
+          timer:8500
+        })
+      }
+      
+
+    }else{
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error',
+        text: 'No es codigo QR de una tablet',
+        heightAuto: false,
+        timer:8500
+      })
+    }
+
   }
 
 

@@ -31,4 +31,19 @@ export class DocenteswsService {
     return this.http.post<any>(url,docente);
   }
 
+  eliminar(id: Number){  
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/eliminarDocente?id="
+    let url=uri+id
+    console.log(url)
+    return this.http.delete(url);
+  }
+
+  buscarDocente(id: number):Observable<DocenteWS>{
+
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/buscarDocente?id="
+    let url=uri+id
+    console.log(url)
+    return this.http.get<DocenteWS>(url);
+ }
+
 }

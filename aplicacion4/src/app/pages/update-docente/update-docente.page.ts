@@ -3,6 +3,9 @@ import { DOCUMENT } from '@angular/common';
 import { Inject } from '@angular/core';
 import { DocenteWS } from 'src/app/domain/docentews';
 import { DocenteswsService } from '../services/docentesws.service';
+import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
+import { MateriaWS } from 'src/app/domain/materiaws';
 
 @Component({
   selector: 'app-update-docente',
@@ -14,32 +17,51 @@ export class UpdateDocentePage implements OnInit {
   docente: DocenteWS = new DocenteWS();
   docente1: DocenteWS = new DocenteWS();
   docentes: any;
+  materia:MateriaWS = new MateriaWS();
+  materias:any;
 
-  constructor(private docenteService: DocenteswsService, @Inject(DOCUMENT) private _document: Document) { }
+  constructor(private _route: ActivatedRoute,private docenteWS: DocenteswsService) { }
+  
+  id: string="";
+  id1: number=0;
 
   ngOnInit(): void {
-    this.cargarDocentes();
+    let id = this._route.snapshot.paramMap.get('id');
+    console.log(id)
+    this.id = `${id}`
+    this.id1= Number(this.id)
+    this.docente.id= Number(this.id)
+    this.cargarDocente();
+    this.cargarMaterias();
   }
 
-  cargarDocentes(): void{
-    this.docentes = this.docenteService.getDocentes();
+  cargarDocente(){
+    this.docenteWS.buscarDocente(this.docente.id).subscribe(docentes=>{
+      this.docente1 = docentes
+      this.docente = this.docente1
+    })
+  }
+  guardarDatos(): void{
+    this.docenteWS.update(this.docente).subscribe(data=>{
+      console.log(data)
+    })
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Docente Actualizado',
+      
+      timer:8500
+    })
+
+    window.location.href="/listar-docentes"
   }
 
-  
-
-  actualizarInformacion(docenteActualizar: DocenteWS): void{
-    this.docente = docenteActualizar;
-    this.docente1 = docenteActualizar;
+  cargarMaterias(): void{
+    this.materias = this.docenteWS.getMaterias();
+    console.log("Hola");
+    console.log("Hola2"+this.docenteWS.getMaterias());
   }
 
-  guardarDatos(){
-    this.docenteService.update(this.docente).subscribe(data => {
-      console.log(data);
-    });
-    console.log(this.docente);
-    this.cargarDocentes();
-    this._document.defaultView?.location.reload(); 
-  }
 
 }
 

@@ -43,6 +43,13 @@ public class ClientesREST {
 	@Inject
 	private UsuarioONLocal usuarioLocal;
 	
+	@Inject
+	private DocenteONLocal docentesON;
+	
+	@Inject
+	private EstudianteONLocal estudiantesON;
+	
+	
 	
 	List<Materia>listMateria = new java.util.ArrayList<Materia>();
 	
@@ -96,6 +103,41 @@ public class ClientesREST {
 		
 		return "no felicidades";
 	}
+	
+	//Eliminar Estudiante
+	@DELETE
+	@Path("eliminarEstudiante")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void eliminar(@QueryParam("id") int id ) {
+		System.out.println("hola"+id);
+		estudianteLocal.delete(id);
+	}
+	
+	//Buscar Docente
+	@GET
+	@Path("buscarDocente")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Docente getDocente(@QueryParam("id") int id){
+		Docente docente = docenteLocal.buscarDocente(id);
+		System.out.println("-----------------------*********************");
+		System.out.println(docente);
+		return docente;
+	}
+	
+	//Buscar Estudiante
+	@GET
+	@Path("buscarEstudiantes")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Estudiante getEstudianteID(@QueryParam("id") int id){
+		Estudiante estudiante = estudianteLocal.buscarEstudiante(id);
+		System.out.println("-----------------------*********************");
+		System.out.println(estudiante);
+		return estudiante;
+	}
+	
 	//Ingresar Materia
 	@POST
 	@Path("RegistrarM")
@@ -123,7 +165,6 @@ public class ClientesREST {
 	
 	
 	//Listar Materia
-	
 	@GET
 	@Path("ListarMateria")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
@@ -146,7 +187,16 @@ public class ClientesREST {
 		materiaLocal.update(mat);
 	}
 	
-	
+	//Eliminar Docente
+	//Eliminar Materia
+		@DELETE
+		@Path("eliminarDocente")
+		@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+		@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+		public void eliminarDocente(@QueryParam("id") int id ) {
+			System.out.println("hola"+id);
+			docenteLocal.delete(id);
+		}
 	
 	//Eliminar Materia
 	@DELETE
@@ -225,10 +275,6 @@ public class ClientesREST {
 	
 	
 	//Joseph 
-	@Inject
-	private DocenteONLocal docentesON;
-	@Inject
-	private EstudianteONLocal estudiantesON;
 	
 	//Estudiantes
 	
@@ -386,6 +432,28 @@ public class ClientesREST {
 		
 		return "no felicidades";
 	}
+	
+	//----------------------------------------
+	@POST
+	@Path("actualizarPrestamo")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public void updateEstudiante(TabletsR tabR) throws Exception {
+		tabletON.updateR(tabR);
+	}
+	
+	//Verificar Tablet
+	@GET
+	@Path("verificarTablet")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Tablets getTabletVerificada(@QueryParam("codigo") String codigo){
+		Tablets tablet = tabletON.verificar(codigo);
+		System.out.println("-----------------------*********************");
+		System.out.println(tablet);
+		return tablet;
+	}
+		
 }
 
 	

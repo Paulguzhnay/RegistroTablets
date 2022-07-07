@@ -28,5 +28,21 @@ export class EstudiantewsService {
     return this.http.post<any>(url, estudiante);
   }
 
+  eliminart(id: Number){  
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/eliminarEstudiante?id="
+    let url=uri+id
+    console.log(url)
+    return this.http.delete(url);
+  }
+
+  buscarEstudiante(id: number):Observable<EstudianteWS>{
+
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/buscarEstudiantes?id="
+    let url=uri+id
+    console.log(url)
+    return this.http.get<EstudianteWS>(url);
+ }
+
+  
 }
 
