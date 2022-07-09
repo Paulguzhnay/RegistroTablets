@@ -1,8 +1,9 @@
 import { DocenteWS } from "./docentews";
 
 export class MateriaWS{
-    id: number=0;
+  docente: DocenteWS = new DocenteWS;
+  id: number=0;
     nombre: string='';
-    
-    docente: DocenteWS = new DocenteWS;
+
+
 }

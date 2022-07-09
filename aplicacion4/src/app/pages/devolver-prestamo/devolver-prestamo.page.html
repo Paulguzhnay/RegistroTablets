@@ -61,7 +61,6 @@
                                       <thead class="bg-grey-dark text-white text-normal">
                                       <tr>
                                           <th style="width: 200px;" scope="col">Fecha</th>
-                                          <th style="width: 200px;" scope="col">Docente</th>
                                           <th style="width: 200px;" scope="col">Estudiante</th>
                                           <th style="width: 200px;" scope="col">Observaciones</th>
                                           <th style="width: 200px;" scope="col">Estado</th>
@@ -73,7 +72,6 @@
                                       <tbody>
                                           <tr *ngFor="let tablet of tabletsP | async">
                                               <td>{{tablet.fecha}}</td>
-                                              <td>{{tablet.docente.nombre}} {{tablet.docente.apellido}}</td>
                                               <td>{{tablet.estudiante.nombre}} {{tablet.estudiante.apellido}}</td>
                                               <td>{{tablet.observaciones}}</td>
                                               <td>{{tablet.estado}}</td>

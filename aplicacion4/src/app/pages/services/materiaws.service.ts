@@ -28,12 +28,11 @@ export class MateriawsService {
     return this.http.get<any>(url);
   }
 
-  update(materia:MateriaWS){
-    let url = "http://localhost:8080/Aplicacion/rs/contactos/actualizarMateria";
+  update(materia: MateriaWS){
+    let url = "http://localhost:8080/Aplicacion/rs/contactos/actMat";
     console.log(materia)
     return this.http.post<any>(url, materia);
   }
-  
   borrarMateria(user: number){
     let uri="http://localhost:8080/Aplicacion/rs/contactos/eliminarMateria?id="
    let url=uri+user
@@ -41,13 +40,18 @@ export class MateriawsService {
    return this.http.delete(url);
   }
   buscarMateria(id:number):Observable<MateriaWS>{
-    
-  let uri="http://localhost:8080/Aplicacion/rs/contactos/ListarMaterias?id="
-   let url=uri+id
-   console.log(url)
-   console.log("AQUI"+this.http.get<MateriaWS>(url));
-   console.log(MateriaWS)
-   return this.http.get<MateriaWS>(url);
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/ListarMaterias?id="
+    let url=uri+id
+    console.log(url)
+    console.log("AQUI"+this.http.get<MateriaWS>(url));
+    console.log(MateriaWS)
+    return this.http.get<MateriaWS>(url);
+ }
+
+ buscarMateriaDocente(id:number) :Observable<MateriaWS>{
+    let uri="http://localhost:8080/Aplicacion/rs/contactos/buscarMateriaDocente?id="
+    let url=uri+id
+    return this.http.get<MateriaWS>(url);
  }
 
 }

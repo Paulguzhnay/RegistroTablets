@@ -80,7 +80,7 @@ export class RegistrarPrestamoPage{
           this.tablet.observaciones='';
           this.tablet.estado ='';
           this.tablet.estadoTxt='';
-          this.tablet.fecha= new Date();
+          this.tablet.fecha = new Date();
           this.tablet.materia.id=0;
           this.tablet.docente.id=0;
           this.tablet.estudiante.id=0;

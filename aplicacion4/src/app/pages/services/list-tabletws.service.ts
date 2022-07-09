@@ -88,7 +88,7 @@ listTabletPrestamo(id:number) : Observable<RTablet>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/listTabletsVerificadas?id="
   let url=uri+id
   console.log(url)
-  return this.http.get<RTablet>(url);;
+  return this.http.get<RTablet>(url);
 }
 
 
