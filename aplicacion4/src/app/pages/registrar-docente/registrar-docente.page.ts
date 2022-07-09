@@ -22,7 +22,7 @@ export class RegistrarDocentePage implements OnInit {
 
   guardarD(){
 
-    if (this.docente.nombre==""||this.docente.apellido==""||this.docente.correo==""||this.docente.asignatura=="") {
+    if (this.docente.nombre==""||this.docente.apellido==""||this.docente.correo=="") {
       
       Swal.fire({
         icon: 'error',
@@ -45,7 +45,7 @@ export class RegistrarDocentePage implements OnInit {
       })
       this.docente.nombre=''
       this.docente.apellido=''
-      this.docente.asignatura=''
+
       this.docente.correo=''
     } 
     

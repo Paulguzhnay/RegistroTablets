@@ -62,7 +62,6 @@
                                     <tr>
                                         <th style="width: 200px;" scope="col">Nombres</th>
                                         <th style="width: 200px;" scope="col">Apellidos</th>
-                                        <th style="width: 200px;" scope="col">Asignatura</th>
                                         <th style="width: 200px; text-align: center;" colspan="2" scope="col">Opciones</th>
                                         
                                     </tr>
@@ -71,7 +70,8 @@
                                         <tr *ngFor="let docente of docentes | async">
                                             <td>{{docente.nombre}}</td>
                                             <td>{{docente.apellido}}</td>
-                                            <td>{{docente.asignatura}}</td>
+
+
                                             
                                             <td>   
                                                 <button class="bg-gray-200 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" style="color: white;">

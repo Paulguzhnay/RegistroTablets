@@ -6,6 +6,7 @@ import { MateriaWS } from 'src/app/domain/materiaws';
 import { DocenteswsService } from '../services/docentesws.service';
 import { MateriawsService } from '../services/materiaws.service';
 import {  ListTabletwsService } from '../services/list-tabletws.service';
+import { Tablet } from 'src/app/domain/tablets';
 
 import jsQR from 'jsqr';
 import { EstudianteWS } from 'src/app/domain/estudiantews';
@@ -17,13 +18,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registrar-prestamo.page.scss'],
 })
 export class RegistrarPrestamoPage{
-  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
+  constructor(private toasstCtrl: ToastController, 
+    private loadingCtrl: LoadingController,
+    private tabletWS: ListTabletwsService,
+    private docenteWS: DocenteswsService,
+    private materiaWS: MateriawsService,
+    private TabletService: ListTabletwsService,
+    ) {} 
   
   tablet: RTablet = new RTablet();
   tablet2: any;
   docente:DocenteWS = new DocenteWS();
   materia:MateriaWS = new MateriaWS();
   estudiante:EstudianteWS = new EstudianteWS();
+  tabletM:Tablet = new Tablet();
   materias:any;
   docentes: any;
   estTablet:any;
@@ -35,10 +43,16 @@ export class RegistrarPrestamoPage{
     this.docentes = this.materiaWS.getDocentes();
   }
   ngOnInit(): void {
-    this.cargarMaterias()
-    this.cargarDocentes()
+    this.cargarMaterias();
+    this.cargarDocentes();
+    this.cargarTablets();
   }
 
+  tablets:any
+  cargarTablets(){
+    this.tablets=this.TabletService.getTablet();
+  }
+  
   buscarEstTablet(){
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
@@ -48,31 +62,41 @@ export class RegistrarPrestamoPage{
   }
   guardarRT(){
     console.log(this.tablet)
-    /*if (this.materia.nombre==""||this.materia.docente.id==0) {
-      
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Datos Vacios',
-      })
-    } 
-    
-    else {*/
+    this.tablet.tablet = this.tablet2;
     this.tabletWS.insertarTabletR(this.tablet).subscribe(data=>{
-      console.log(this.tablet)
       console.log(data)
-    })   
-/*      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'La materia ha sido creada exitosamente',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      this.materia.nombre=''
-      this.materia.docente.id=0    
-    }*/
-  
+      console.log("-----------")
+        if(data==true){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'La tablet a sido registrada con exito',
+            showConfirmButton: false,
+            heightAuto: false,
+            timer: 1500
+
+
+          })
+          this.tablet.observaciones='';
+          this.tablet.estado ='';
+          this.tablet.estadoTxt='';
+          this.tablet.fecha= new Date();
+          this.tablet.materia.id=0;
+          this.tablet.docente.id=0;
+          this.tablet.estudiante.id=0;
+          this.tablet.tablet.id=0;
+
+        }else{
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'El registro cuenta con datos invalidos',
+            showConfirmButton: false,
+            heightAuto: false,
+            timer: 1500
+          })
+        }
+    })     
   }
 
   escanerActivo = false;
@@ -182,34 +206,20 @@ export class RegistrarPrestamoPage{
     img.src = URL.createObjectURL(file);
   }
 
-  verificar(){
-    const codigo = this.resultadoEscaner.split(" ");
-    console.log(codigo.length)
-    console.log(codigo[4])
-    if (codigo.length == 5){
-      this.tablet2 = this.tabletWS.verificarTablet(codigo[4]);
-      console.log("hola",this.tablet2)
-      if(this.tablet2 == null){
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Error',
-          text: 'Tablet no registrada',
-          heightAuto: false,
-          timer:8500
-        })
-      }else{
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Informacion de la Tablet',
-          text: this.resultadoEscaner,
-          heightAuto: false,
-          timer:8500
-        })
-      }
-      
+  /*  buscarEstTablet(){
+    this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
+        this.estudiantes = data;
+        console.log(this.estudiantes);
+    });*/ 
 
+  verificar(){
+    let codigo = this.resultadoEscaner.split("\n");
+    if (codigo.length == 3){
+      this.tablet.tablet.nombre = codigo[0];
+      this.tabletWS.verificarTablet(codigo[0]).subscribe(data=>{
+        this.tablet2=data;
+        console.log(data);
+        });
     }else{
       Swal.fire({
         position: 'center',

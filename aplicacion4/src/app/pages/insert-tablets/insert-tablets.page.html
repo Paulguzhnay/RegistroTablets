@@ -65,7 +65,7 @@
                                                   Nombre Tablet
                                               </label>
                                               <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                     id="nombre" name="nombre" type="text" placeholder="Xiaomi A1" [(ngModel)]="TabletGrupo.nombre">
+                                                     id="nombre" name="nombre" type="text" placeholder="" [(ngModel)]="TabletGrupo.nombre">
                                               
                                           </div>
                                           <div class="w-full md:w-1/2 px-3">
@@ -89,10 +89,42 @@
                                                      id="correo" name="correo" type="text" placeholder="Laboratorio 1" [(ngModel)]="TabletGrupo.laboratorio">
                                               
                                           </div>
-  
-                                         
-  
                                       </div>
+                                      
+                                    <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event)">
+                                    <ion-button expand="full" (click)="captureImage()">
+                                        <ion-icon slot="start" name="camera"></ion-icon>
+                                            Capturar & Escanear QR Celular
+                                    </ion-button>
+                                    
+                                    <ion-button expand="full" (click)="escanear()">
+                                        <ion-icon slot="Escanear" name="scan-outline"></ion-icon>    
+                                            Escanear Código QR Computadora
+                                    </ion-button>
+                                    
+                                    <ion-button expand="full" (click)="reset()" color="warming" *ngIf="resultadoEscaner">
+                                        <ion-icon slot="Escanear" name="refresh"></ion-icon>    
+                                            Escanear Otra Vez
+                                        </ion-button>
+                                    
+                                    <ion-row class="ion-align-items-center">
+                                        <ion-col size="2"></ion-col>
+                                        <ion-col size="8">
+                                        <!-- Shows our camera stream -->
+                                            <video #video [hidden]="!escanerActivo" width="100%"></video>
+                                        </ion-col>
+                                        <ion-col size="2"></ion-col>
+                                    </ion-row>
+                                    
+                                    <canvas #canvas hidden></canvas>
+                                    
+                                    <ion-button expand="full" (click)="detener()" color="warming" *ngIf="escanerActivo">
+                                        <ion-icon slot="Escanear" name="close"></ion-icon>    
+                                            Detener Escaner
+                                        </ion-button>
+                                    <ion-card *ngIf="resultadoEscaner">
+
+                                    </ion-card>
   
     
                <!--BOTON-->

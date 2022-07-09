@@ -21,10 +21,6 @@ export class UpdateEstudiantesPage implements OnInit {
   estudiantes: any;
   materia:MateriaWS = new MateriaWS();
   materias:any;
-
-
-
-
   id: string="";
   id1: number=0;
 

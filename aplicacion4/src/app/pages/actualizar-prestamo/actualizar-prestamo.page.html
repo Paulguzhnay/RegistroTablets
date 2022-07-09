@@ -1,0 +1,200 @@
+<ion-header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Css -->
+  <link rel="stylesheet" href="menu-principal.component.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
+  <title>Forms | Tailwind Admin</title>
+</ion-header>
+
+<ion-content>
+
+<!--Container -->
+<div class="mx-auto bg-grey-lightest">
+    <!--Screen-->
+    <div class="min-h-screen flex flex-col">
+        <!--Header Section Starts Here-->
+        <ion-header class="bg-nav">
+            <div class="flex justify-between">
+                <div class="p-1 mx-3 inline-flex items-center">
+                    <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
+                    <h1 class="text-white p-2">Logo</h1>
+                </div>
+                <div class="p-1 flex flex-row items-center">
+        
+
+                </div>
+            </div>
+        </ion-header>
+        <!--/Header-->
+
+        <div class="flex flex-1">
+            <!--Sidebar-->
+
+
+            <!--Main-->
+            
+
+                <div class="flex flex-col">
+                    <!-- Card Sextion Starts Here -->
+
+                        <!--/Underline form-->
+                    </div>
+                    <!-- /Cards Section Ends Here -->
+
+                    <!--Grid Form-->
+
+                    
+                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                            <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
+                                Actualizar Prestamo
+                            </div>
+                            <div class="p-3">
+                                <form class="w-full">
+
+<!---------------------------------------------------------------------------------------------------->
+                                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                               for="carrera">
+                                            Fecha
+                                        </label>
+                                        <input type="date" id="fecha" name="fecha"
+                                        value="tablet.fecha" 
+                                        min="2022-07-01" max="2040-12-31" [(ngModel)]="tablet.fecha" >
+                             
+                                    </div>
+                                    
+                                    <br>
+
+                                
+<!---------------------------------------------------------------------------------------------------->
+                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                                   for="carrera">
+                                                Asignatura
+                                            </label>
+                                            <div class="relative">
+
+                                              {{tablet.materia.nombre}}
+
+                                          </div>
+                                        </div>
+                                        <br>
+<!---------------------------------------------------------------------------------------------------->    
+                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                                   for="carrera">
+                                                Docente
+                                            </label>
+                                            <div class="relative">
+
+                                              {{tablet.docente.nombre}} {{tablet.docente.apellido}}
+                                          </div>
+                                        </div>
+                                        <br>
+
+
+    
+                                                                   
+<!---------------------------------------------------------------------------------------------------->    
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                  <br>
+                  <br>  
+                  <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                        for="carrera">
+                        Nombre del Estudiante
+                    </label>
+                    <div class="relative">
+
+                    {{tablet.estudiante.nombre }} {{tablet.estudiante.apellido }}
+
+
+
+                  </div>
+                </div>
+                <br>
+<!---------------------------------------------------------------------------------------------------->    
+<!------------------------------------------------TABLET------------------------------------------------------->
+                                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                      <br>
+                                      <label
+                                          class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                          for="codTablet">
+                                          Nombre de la Tablet
+                                      </label>
+
+                                          <div class="relative">
+
+                                              <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                              id="codTablet" name="codTablet" [(ngModel)]="tablet.tablet.nombre" type="text" placeholder=""  value="{{tablet.tablet.id}}" >
+
+
+                                          </div>
+                                  </div>
+<!------------------------------------------------------------------------------------------------------------------->
+
+                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                          <br>
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                                   for="observaciones">
+                                                Observaciones
+                                            </label>
+                                            <textarea id="observacion" name="observacion" rows="4" cols="50" [(ngModel)]="tablet.observaciones"></textarea>
+                                            <br> 
+
+                                        </div>
+                                        <br>
+<!---------------------------------------------------------------------------------------------------->    
+<!---------------------------------------------------------------------------------------------------->    
+                                        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                                            <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
+                                                for="carrera">
+                                                <h2>Estado</h2>
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="disponible" value="Disponible" [(ngModel)]="tablet.estado"> Disponible <br>
+                                                <input type="radio" name="Ndisponible" value="No disponible"  [(ngModel)]="tablet.estado"> No Disponible<br>                                                    
+                                                <input type="radio" name="prestado" value="Prestado"  [(ngModel)]="tablet.estado"> Prestado<br>
+                                                <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1" for="carrera">
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <h2>¿A quien?</h2>
+                                            </label>
+                                                <textarea id="estadoTxt" name="estadoTxt" rows="4" cols="50"  [(ngModel)]="tablet.estadoTxt" ></textarea>
+                                            </label>
+
+                                        </div>
+                                        <br>
+                                        <br>
+
+                                      
+      
+                                      
+             <!--BOTON-->
+                                    <div class="md:flex md:items-center">
+                                        <div class="md:w-1/3"></div>
+                                        <div class="md:w-2/3">
+                                            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                                            (click)="guardarDatos()" type="button">
+                                                    Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    
+                    <!--/Grid Form-->
+                </div>
+            <!--/Main-->
+        </div>
+        <!--Footer-->
+        <footer class="bg-grey-darkest text-white p-2">
+            <div class="flex flex-1 mx-auto">&copy; My Design</div>
+        </footer>
+        <!--/footer-->    
+    </div>
+<script src="./main.js"></script>
+</ion-content>

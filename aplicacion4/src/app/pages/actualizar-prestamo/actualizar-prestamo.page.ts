@@ -6,19 +6,25 @@ import { MateriaWS } from 'src/app/domain/materiaws';
 import { DocenteswsService } from '../services/docentesws.service';
 import { MateriawsService } from '../services/materiaws.service';
 import {  ListTabletwsService } from '../services/list-tabletws.service';
+import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import jsQR from 'jsqr';
 import { EstudianteWS } from 'src/app/domain/estudiantews';
 
 @Component({
-  selector: 'app-devolver-prestamo',
-  templateUrl: './devolver-prestamo.page.html',
-  styleUrls: ['./devolver-prestamo.page.scss'],
+  selector: 'app-actualizar-prestamo',
+  templateUrl: './actualizar-prestamo.page.html',
+  styleUrls: ['./actualizar-prestamo.page.scss'],
 })
-export class DevolverPrestamoPage implements OnInit {
+export class ActualizarPrestamoPage implements OnInit {
 
-  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
+  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,
+    private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,
+    private materiaWS: MateriawsService,
+    private _route: ActivatedRoute) {} 
+
   tablet: RTablet = new RTablet();
+  tabletPrest: RTablet = new RTablet();
   docente:DocenteWS = new DocenteWS();
   materia:MateriaWS = new MateriaWS();
   estudiante:EstudianteWS = new EstudianteWS();
@@ -27,22 +33,41 @@ export class DevolverPrestamoPage implements OnInit {
   estTablet:any;
   estudiantes:any;
   tabletsP:any;
+  id: string="";
+  id1: number=0;
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
   }
   ngOnInit() {
+    let idF = this._route.snapshot.paramMap.get('id');
+    console.log(idF);
+    this.id = `${idF}`;
+    this.id1==Number(this.id);
+    this.tablet.id=Number(this.id)
+    this.buscarEstTablet();
     this.cargarMaterias();
     this.cargarDocentes();
     this.cargarTabletsP();
+    this.cargarDatosTablet();
+
   }
 
   buscarEstTablet(){
-    this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
-        this.estudiantes = data;
-        console.log(this.estudiantes);
+    console.log("Num ",this.tablet.id);
+    this.tabletWS.listTabletPrestamo(this.tablet.id).subscribe(data=>{
+        console.log(data);
+        this.tabletPrest = data;
+        this.tablet = this.tabletPrest
     });
-
   }
+
+  cargarDatosTablet(){
+    this.tabletWS.listTabletPrestamo(this.tablet.id).subscribe(data=>{
+      this.tabletPrest = data;
+      console.log(data)
+  })
+  }
+
   guardarDatos(): void{
     this.tabletWS.actualizarTabletR(this.tablet).subscribe(data=>{
       console.log("----------------------------------")
@@ -51,12 +76,12 @@ export class DevolverPrestamoPage implements OnInit {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Docente Actualizado',
-      
+      title: 'Tablet Actualizado',
+      heightAuto: false,
       timer:8500
     })
 
-    window.location.href="/listar-docentes"
+    window.location.href="/devolver-prestamo"
   }
   cargarDocentes(): void{
     this.docentes = this.materiaWS.getDocentes();

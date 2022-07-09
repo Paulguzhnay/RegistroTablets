@@ -83,6 +83,10 @@ const routes: Routes = [
   {
     path: 'devolver-prestamo',
     loadChildren: () => import('./pages/devolver-prestamo/devolver-prestamo.module').then( m => m.DevolverPrestamoPageModule)
+  },
+  {
+    path: 'actualizar-prestamo/:id',
+    loadChildren: () => import('./pages/actualizar-prestamo/actualizar-prestamo.module').then( m => m.ActualizarPrestamoPageModule)
   }
  
 ];

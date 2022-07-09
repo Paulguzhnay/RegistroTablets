@@ -8,9 +8,8 @@ export class EstudianteWS{
     carrera:string='';
     asignatura:string='';
     periodoAcademico:string='';
-
+    codTablet:string='';
 
     materia: MateriaWS = new MateriaWS;
-    tablet: Tablet = new Tablet;
 
 }

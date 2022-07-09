@@ -100,24 +100,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="w-full md:w-1/2 px-3 ">
-                                                <br>
-                                                <label class="block uppercase tracking-wide text-grey-darker text-xs font-light mb-1"
-                                                       for="id">
-                                                    Asignatura
-                                                </label>
-                                                <div class="relative">
-                                                    <select
-                                                        class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                                        id="asignatura" name="asignatura" [(ngModel)]="docente.asignatura">
-                                                        <option>{{docente.asignatura}}</option>
-        
-                                                        <option *ngFor="let materia of materias | async">
-                                                            {{materia.nombre}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                             
                                         </div>
     

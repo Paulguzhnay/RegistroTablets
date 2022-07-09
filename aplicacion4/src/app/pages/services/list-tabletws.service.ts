@@ -9,6 +9,8 @@ import { RTablet } from 'src/app/domain/RegTablet';
   providedIn: 'root'
 })
 export class ListTabletwsService {
+  
+  ta: any;
 
   constructor(private http: HttpClient) { }
 
@@ -60,7 +62,6 @@ export class ListTabletwsService {
  insertarTabletR(tabletR:RTablet):Observable<any>{
   let url="http://localhost:8080/Aplicacion/rs/contactos/InsertarTR";
   console.log(url)
-  console.log(tabletR)
   return this.http.post<any>(url,tabletR);
 }
 actualizarTabletR(tabletR:RTablet):Observable<any>{
@@ -68,10 +69,28 @@ actualizarTabletR(tabletR:RTablet):Observable<any>{
   console.log(tabletR)
   return this.http.post<any>(url,tabletR);
 }
+getTabletPrestamo(){
 
-verificarTablet(codigo: string):Observable<Tablet>{
+  let url="http://localhost:8080/Aplicacion/rs/contactos/verficarTabletsPrestadas"
+  
+  console.log(url)
+  return this.http.get<any>(url);
+
+}
+
+verificarTablet(codigo: string): Observable<Tablet>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarTablet?codigo="
   let url=uri+codigo
-  return this.http.get<Tablet>(url);
+  return this.http.get<Tablet>(url);;
 }
+//----------
+listTabletPrestamo(id:number) : Observable<RTablet>{
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/listTabletsVerificadas?id="
+  let url=uri+id
+  console.log(url)
+  return this.http.get<RTablet>(url);;
+}
+
+
+
 }
