@@ -31,7 +31,9 @@ export class MateriawsService {
   update(materia: MateriaWS){
     let url = "http://localhost:8080/Aplicacion/rs/contactos/actMat";
     console.log(materia)
+    console.log("HOLA 1")
     return this.http.post<any>(url, materia);
+    console.log("PASO")
   }
   borrarMateria(user: number){
     let uri="http://localhost:8080/Aplicacion/rs/contactos/eliminarMateria?id="

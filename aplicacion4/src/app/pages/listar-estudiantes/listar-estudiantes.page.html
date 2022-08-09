@@ -1,118 +1,111 @@
 <ion-header>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Css -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
-  <title>Forms | Tailwind Admin</title>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Css -->
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
+    <title>Forms | Tailwind Admin</title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </ion-header>
-
 <ion-content>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
+  <!--Container -->
+  <div class="mx-auto bg-grey-400">
+      <!--Screen-->
+      <div class="min-h-screen flex flex-col">
+          <!--Header Section Starts Here-->
+          <header class="bg-nav">
+              <div class="flex justify-between">
+                  <div class="p-1 mx-3 inline-flex items-center">
+                      
+                      <h1 class="text-white p-2"> Bienvenido Administrador</h1>
+                  </div>
 
-<!--Container -->
-<div class="mx-auto bg-grey-400">
-    <!--Screen-->
-    <div class="min-h-screen flex flex-col">
-        <!--Header Section Starts Here-->
-        <header class="bg-nav">
-            <div class="flex justify-between">
-                <div class="p-1 mx-3 inline-flex items-center">
-                    <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-                    <h1 class="text-white p-2">Logo</h1>
-                </div>
+  
+              </div>
+          </header>
+          <!--/Header-->
+  
+          
+              
+              <!--Sidebar-->
+              <!--Sidebar-->
+
+  
+             
+              <!--/Sidebar-->
+              <!--Main-->
+              <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
+                Listar Estudiantes
             </div>
-        </header>
-        <!--/Header-->
+              <form action="/ObtenerDatos/" method="get" class="">
+              
+  
+                <div class="container">
 
-        <div class="flex flex-1">
-            
-            <!--Sidebar-->
-            <!--Sidebar-->
-
-
-            <!--/Sidebar-->
-            <!--Main-->
-            <form action="/ObtenerDatos/" method="get" class="">
-            <main class="bg-white-300 flex-1 p-3 overflow-hidden">
-
-               <!--   <input class="buttons" type="submit" (click)="cargarTablets()" name="" value="Ingresar"> -->
-                <div class="flex flex-col">
-                    <!-- Stats Row Starts Here -->
-                    
-
-                    <!-- /Stats Row Ends Here -->
-
-                    <!-- Card Sextion Starts Here -->
-                    <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
-
-                        <!-- card -->
-
-                        <div class="rounded overflow-hidden shadow bg-white mx-2 w-full"
-                        ng-controller="controller">
-                            <div class="px-6 py-2 border-b border-light-grey">
-                                <div class="font-bold text-xl">Estudiantes</div>
-                            </div>
-                            <div class="table-responsive" >
-                                
-                                
-                                <table class="table text-grey-darkest"  >
-                                    
-                                    <thead class="bg-grey-dark text-white text-normal">
-                                    <tr>
-                                        <th style="width: 200px;" scope="col">Nombres</th>
-                                        <th style="width: 200px;" scope="col">Apllidos</th>
-                                        <th style="width: 200px;" scope="col">Carrera</th>
-                                        <th style="width: 200px; text-align: center;" colspan="2" scope="col">Opciones</th>
-                                        
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let estudiante of estudiantes | async">
-                                            <td>{{estudiante.nombre}}</td>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4 class="text-center mb-4"></h4>
+                        <div class="table-wrap">
+                         
+                          <table class="table custom-table">
+                            <thead>
+                              <tr>
+          
+          
+                                <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Nombres</th>
+                                        <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Apllidos</th>
+                                        <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Carrera</th>
+                                        <th style="width: 200px; text-align: center; color: white; background-color: #004E7C;" colspan="2" scope="col">Opciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let estudiante of estudiantes | async" scope="row">
+          
+                                <td>{{estudiante.nombre}}</td>
                                             <td>{{estudiante.apellido}}</td>
                                             <td>{{estudiante.carrera}}</td>
                                             
                                             <td>   
                                                 <button class="bg-gray-200 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" style="color: white;">
                                                     
-                                                    <a [routerLink]="['/update-estudiantes',estudiante.id]">
+                                                    <a [routerLink]="['/update-estudiantes',estudiante.id]" style="color: white;">
 
                                                             Actualizar
                                                     </a>
                                                 </button>
                                             </td>
-                                            <td>   
-                                                <button  (click)="eliminar(estudiante.id)" class="bg-gray-200 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" style="color: white;">
-                                                    <span>Borrar</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                            <td>
+                              </tr>
+          
+          
+          
+                            </tbody>
+                          </table>
                         </div>
-                        <!-- /card -->
-
+                      </div>
                     </div>
-                    <!-- /Cards Section Ends Here -->
-                    
-                    
-                  
-                    <!--/Profile Tabs-->
-                </div>
-            </main>
-        </form>
-            <!--/Main-->
-        </div>
+                  </div>
+             
+          </form>
+              <!--/Main-->
+         
         <!--Footer-->
         <footer class="bg-grey-darkest text-white p-2">
-        </footer>
-        <!--/footer-->
+          <div class="flex flex-1 mx-auto">Carrera de Educación-Universidad Politécnica Salesiana </div>
+      </footer>
+      <!--/footer-->
 
-    </div>
-
-</div>
-<script src="./main.js"></script>
-</ion-content>
+  
+      </div>
+  
+  </div>
+  <script src="./main.js"></script>
+  
+  
+  </ion-content>

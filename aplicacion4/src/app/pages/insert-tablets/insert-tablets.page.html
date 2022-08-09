@@ -5,7 +5,7 @@
     <!-- Css -->
     <link rel="stylesheet" href="menu-principal.component.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
-    <title>Forms | Tailwind Admin</title>
+ 
 </ion-header>
 <ion-content>
 
@@ -18,18 +18,11 @@
               <div class="flex justify-between">
                   <div class="p-1 mx-3 inline-flex items-center">
                       <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-                      <h1 class="text-white p-2">Logo</h1>
+                      <h1 class="text-white p-2"> Bienvenido Administrador</h1>
                   </div>
                   <div class="p-1 flex flex-row items-center">
           
-                      <div id="ProfileDropDown" class="rounded hidden shadow-md bg-white absolute pin-t mt-12 mr-1 pin-r">
-                          <ul class="list-reset">
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">My account</a></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Notifications</a></li>
-                            <li><hr class="border-t mx-2 border-grey-ligght"></li>
-                            <li><a href="#" class="no-underline px-4 py-2 block text-black hover:bg-grey-light">Logout</a></li>
-                          </ul>
-                      </div>
+ 
                   </div>
               </div>
           </header>
@@ -43,9 +36,6 @@
               
   
                   <div class="flex flex-col">
-                      <!-- Card Sextion Starts Here -->
-  
-                          <!--/Underline form-->
                       </div>
                       <!-- /Cards Section Ends Here -->
   
@@ -53,9 +43,9 @@
   
                       
                           <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
-                              <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                  <div class="font-bold text-xl">Nueva Tablet</div>
-                              </div>
+                            <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
+                                Registrar Tablet
+                            </div>
                               <div class="p-3">
                                   <form class="w-full">
                                       <div class="flex flex-wrap -mx-3 mb-6">
@@ -91,40 +81,46 @@
                                           </div>
                                       </div>
                                       
-                                    <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event)">
-                                    <ion-button expand="full" (click)="captureImage()">
+                                      <input #fileinput type="file" accept="image/*;capture=camera" hidden (change)="handleFile($event)">
+                                      <ion-button expand="full" (click)="captureImage()">
                                         <ion-icon slot="start" name="camera"></ion-icon>
-                                            Capturar & Escanear QR Celular
-                                    </ion-button>
+                                        Capturar & Escanear QR Celular
+                                      </ion-button>
                                     
-                                    <ion-button expand="full" (click)="escanear()">
+                                      <ion-button expand="full" (click)="escanear()">
                                         <ion-icon slot="Escanear" name="scan-outline"></ion-icon>    
-                                            Escanear Código QR Computadora
-                                    </ion-button>
+                                        Escanear Código QR Computadora
+                                      </ion-button>
                                     
-                                    <ion-button expand="full" (click)="reset()" color="warming" *ngIf="resultadoEscaner">
+                                      <ion-button expand="full" (click)="reset()" color="warming" *ngIf="resultadoEscaner">
                                         <ion-icon slot="Escanear" name="refresh"></ion-icon>    
-                                            Escanear Otra Vez
-                                        </ion-button>
+                                        Escanear Otra Vez
+                                      </ion-button>
                                     
-                                    <ion-row class="ion-align-items-center">
+                                      <ion-row class="ion-align-items-center">
                                         <ion-col size="2"></ion-col>
                                         <ion-col size="8">
-                                        <!-- Shows our camera stream -->
-                                            <video #video [hidden]="!escanerActivo" width="100%"></video>
+                                          <!-- Shows our camera stream -->
+                                          <video #video [hidden]="!escanerActivo" width="100%"></video>
                                         </ion-col>
                                         <ion-col size="2"></ion-col>
-                                    </ion-row>
+                                      </ion-row>
                                     
-                                    <canvas #canvas hidden></canvas>
+                                      <canvas #canvas hidden></canvas>
                                     
-                                    <ion-button expand="full" (click)="detener()" color="warming" *ngIf="escanerActivo">
+                                      <ion-button expand="full" (click)="detener()" color="warming" *ngIf="escanerActivo">
                                         <ion-icon slot="Escanear" name="close"></ion-icon>    
-                                            Detener Escaner
-                                        </ion-button>
-                                    <ion-card *ngIf="resultadoEscaner">
-
-                                    </ion-card>
+                                          Detener Escaner
+                                      </ion-button>
+                                    
+                                      <ion-card *ngIf="resultadoEscaner">
+                                        <ion-card-header>
+                                          <ion-card-title>Información de la Tablet</ion-card-title>
+                                        </ion-card-header>
+                                        <ion-card-content>
+                                          {{ resultadoEscaner }}
+                                        </ion-card-content>
+                                      </ion-card>
   
     
                <!--BOTON-->
@@ -137,42 +133,20 @@
                                               </button>
                                           </div>
                                       </div>
-  
-                                  
                                   </form>
-  
-                                  
-                              
-  
-  
-  
                               </div>
                           </div>
                       
                       <!--/Grid Form-->
-  
-                      
                   </div>
-  
-  
-  
-  
-                  
-  
               <!--/Main-->
-          </div>
-          <!--Footer-->
-          <footer class="bg-grey-darkest text-white p-2">
-              <div class="flex flex-1 mx-auto">&copy; My Design</div>
-          </footer>
-          <!--/footer-->
-  
-      </div>
-  
-  
-  
-  <script src="./main.js"></script>
-  
+      <!--Footer-->
+        <footer class="bg-grey-darkest text-white p-2">
+          <div class="flex flex-1 mx-auto">Carrera de Educación-Universidad Politécnica Salesiana </div>
+      </footer>
+      <!--/footer-->
 
-  
+          </div>
+      </div>
+  <script src="./main.js"></script>
   </ion-content>

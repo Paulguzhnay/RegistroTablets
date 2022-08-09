@@ -15,35 +15,15 @@ export class UsuarioService {
 
   registrarUsuario(usuario:UsuarioWS):Observable<any>{
     let url="http://localhost:8080/Aplicacion/rs/contactos/RegistroU";
-    console.log(url)
-    console.log(usuario)
-    return this.http.post<any>(url,usuario);
+    const options ={responseType: 'text' as 'json'};
+    return this.http.post(url,usuario,options);
   }
 
   logeoUsuario(logdatos : Logeo){
     let url="http://localhost:8080/Aplicacion/rs/contactos/Login?correo="+logdatos.correo +"&password="+logdatos.password;
-    console.log(url)
-    console.log("--"+this.http.get<any>(url));
     return this.http.get<any>(url);
 
 
   }
 
-/*  logeoUsuario(correo :String, password:String):Observable<any[]>{
-    let url="http://localhost:8080/Aplicacion/rs/contactos/Login?correo="+correo +"}&password={"+password;
-    console.log(url)
-    return this.http.get<any>(url);
-
-  }
-*/
-
-
- /* logeoUsuario(logdatos : Logeo):Observable<any[]>{
-    let url="http://localhost:8080/Aplicacion/rs/contactos/Login?correo={"+logdatos.correo +"}&password={"+logdatos.password+"}";
-    console.log(url)
-    
-    return this.http.post<any>(url,logdatos);
-
-  }
-*/
 }

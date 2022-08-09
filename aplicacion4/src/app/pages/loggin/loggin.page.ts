@@ -5,6 +5,7 @@ import { autentificacion } from 'src/app/domain/singleton';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { MenuController } from '@ionic/angular';
+import { AuthenticationService } from 'src/app/api/authentication.service';
 @Component({
   selector: 'app-loggin',
   templateUrl: './loggin.page.html',
@@ -14,11 +15,13 @@ export class  LogginPage implements OnInit {
   login : Logeo = new Logeo();
   c: any;
 
-  //constructor(private usuario: UsuarioService, private router: Router, private aut : autentificacion) { }
-  constructor(private usuario: UsuarioService, private router: Router, private menu:MenuController) { }
+  constructor(private auth: AuthenticationService, 
+              private router: Router, 
+              private menu:MenuController) { }
 
   ionViewWillEnter(){
     this.menu.enable(false);
+    this.auth.remove();
   }
 
   ionViewDidEnter(){
@@ -29,30 +32,25 @@ export class  LogginPage implements OnInit {
   ngOnInit(): void {
     this.login.password="";
     this.login.correo="";
+    this.auth.remove();
   }
 
 
   logeo(){
-    console.log('--------')
-    console.log(this.usuario)
-    console.log('--------')
-    console.log(this.login.password)
-    console.log(this.login.correo)
-    console.log('-----/////**--')
-    console.log(this.usuario.logeoUsuario)
-    console.log('----*//*/*----')
-    
-
-    this.usuario.logeoUsuario(this.login).subscribe((res: any[]) => {
+  
+    this.auth.doLogin(this.login).subscribe((res: any[]) => {
       this.c = res
-      console.log(this.c)
-
-     
+   
       if(this.c==true){
-        this.router.navigate(['/menu-principal']);
+        this.auth.setUsuario(this.login);
+        this.auth.SetSession(true);
+          
+        return this.router.navigate(['/menu-principal']).then(() => false);
+        }else {
+          this.auth.SetSession(false);
+
       }
     });
-
 
   }
 

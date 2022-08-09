@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EstudianteWS } from 'src/app/domain/estudiantews';
+import { RTablet } from 'src/app/domain/RegTablet';
 
 @Injectable({
   providedIn: 'root'
@@ -34,15 +35,28 @@ export class EstudiantewsService {
     console.log(url)
     return this.http.delete(url);
   }
-
-  buscarEstudiante(id: number):Observable<EstudianteWS>{
+//--------------------------
+  buscarEstudiante(id: Number):Observable<EstudianteWS>{
 
     let uri="http://localhost:8080/Aplicacion/rs/contactos/buscarEstudiantes?id="
     let url=uri+id
     console.log(url)
     return this.http.get<EstudianteWS>(url);
  }
+ updateR(tabletR: RTablet){
+  let url = "http://localhost:8080/Aplicacion/rs/contactos/actualizarPrestamo";
+  console.log(tabletR)
+  console.log("HOLA 1")
+  return this.http.post<any>(url, tabletR);
+  console.log("PASO")
+}
+//
+estudiantesRegistroTablet (id: Number):Observable<RTablet>{
 
-  
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/estudiantesPrestamos?id="
+  let url=uri+id
+  console.log(url)
+  return this.http.get<RTablet>(url);
+}
 }
 

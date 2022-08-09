@@ -4,5 +4,6 @@ export class UsuarioWS{
     correo:string='';
     rol:string='';
     cargo:string='';
+    password:string='';
 
 }

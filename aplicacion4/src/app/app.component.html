@@ -3,11 +3,11 @@
     <ion-menu style="padding-top: 0px; margin: 0px;" contentId="main-content" type="overlay">
       <ion-content  style="padding-top: 0px;">
         <ion-list style="padding-top:0px ;" id="inbox-list">
-          <img  style="padding-top: 0px; padding-left: 2px;"src="../../../assets/icon/favicon.png" width="50" height="50"/>
+          <img  style="padding-top: 0px; padding-left: 2px;"src="../../../assets/Logo-carrera1.ico" width="200" height="200"/>
           <ion-list-header  style="padding-top: 0px;" style="padding-left: 5px;">Menú</ion-list-header>
          
 
-          <ion-menu-toggle  style="padding-top: 2px; margin: 0px;" auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-menu-toggle   style="padding-top: 2px; margin: 0px;" auto-hide="false"  *ngFor="let p of appPages; let i = index">
             <ion-item  style="padding-top: 0px; " routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               
               <ion-label  style="padding-top: 0px;">{{ p.title }}</ion-label>

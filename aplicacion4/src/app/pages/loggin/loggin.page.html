@@ -5,7 +5,7 @@
   <!-- Css -->
   <link rel="stylesheet" href="menu-principal.component.css">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
-  <title>Forms | Tailwind Admin</title>
+
 </ion-header>
 
 
@@ -16,20 +16,20 @@
     <div class="w-full max-w-lg">
       <div class="leading-loose">
         <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
-          <p class="text-gray-800 font-medium text-center text-lg font-bold">Login</p>
+          <p class="text-gray-800 font-medium text-center text-lg font-bold">Sistema de Registro Laboratorio de TICS</p>
           <div class="">
-            <label class="block text-sm text-gray-00" for="username">Mail</label>
-            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="username" name="username" type="text" required="" placeholder="User Name" aria-label="correo" [(ngModel)]="login.correo" />
+            <label class="block text-sm text-gray-00" for="username">Correo</label>
+            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="username" name="username" type="text" required="" placeholder="Usuario" aria-label="correo" [(ngModel)]="login.correo" />
           <!--Imput para tomar dato del username-->
           </div>
           <div class="mt-2">
-            <label class="block text-sm text-gray-600" for="password">Password</label>
-            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="password" name="password" type="password" required="" placeholder="***" aria-label="password" [(ngModel)]="login.password" />
+            <label class="block text-sm text-gray-600" for="password">Contraseña</label>
+            <input class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey" id="password" name="password" type="password" required="" placeholder="********" aria-label="password" [(ngModel)]="login.password" />
                 <!--Imput para tomar dato de la contraseña-->
           </div>
           <div class="mt-4 items-center justify-between">
         
-           <button (click)="logeo()" class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Iniciar Sesion</button>
+           <button (click)="logeo()" class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Iniciar Sesión</button>
         <!--boton de login-->
             
           </div>
@@ -40,6 +40,11 @@
     </div>
   </div>
 
-  
+          <!--Footer-->
+          <footer class="bg-grey-darkest text-white p-2">
+            <div class="flex flex-1 mx-auto">Carrera de Educación-Universidad Politécnica Salesiana </div>
+        </footer>
+        <!--/footer-->
+
   </ion-content>
   

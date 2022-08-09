@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ListTabletwsService } from '../services/list-tabletws.service';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Tablet } from 'src/app/domain/tablets';
 import { empty } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -11,8 +12,7 @@ import jsQR from 'jsqr';
 })
 export class InsertTabletsPage implements OnInit {
   TabletGrupo:Tablet=new Tablet;
-  loadingCtrl: any;
-  constructor(private TabletService: ListTabletwsService) { }
+  constructor(private TabletService: ListTabletwsService, private loadingCtrl: LoadingController) { }
 
   ngOnInit(): void {
   }

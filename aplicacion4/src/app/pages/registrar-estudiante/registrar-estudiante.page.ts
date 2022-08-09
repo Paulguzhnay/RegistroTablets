@@ -81,7 +81,7 @@ name:any;
     */
     this.estudianteWS.registrarEstudiante(this.estudiante).subscribe(data=>{
       console.log("-------------------------------------------")
-      console.log(data)
+      console.log(this.estudiante)
     })
   }
   tablets:any
@@ -193,12 +193,14 @@ name:any;
     img.src = URL.createObjectURL(file);
   }
   verificar(){
-    const codigo = this.resultadoEscaner.split(" ");
-    console.log(codigo.length)
-    console.log(codigo[0]);
-    if (codigo.length == 5){
+    let codigo = this.resultadoEscaner.split("\n");
+
+    if (codigo.length == 3){
+      
+      console.log(codigo[0])
+      this.estudiante.codTablet = codigo[0]; 
       this.tablet2 = this.tabletWS.verificarTablet(codigo[4]);
-      console.log("hola",this.tablet2)
+      console.log("hola",codigo[0])
       
       if(this.tablet2 == null){
         Swal.fire({

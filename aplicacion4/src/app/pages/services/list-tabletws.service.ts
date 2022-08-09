@@ -81,7 +81,7 @@ getTabletPrestamo(){
 verificarTablet(codigo: string): Observable<Tablet>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarTablet?codigo="
   let url=uri+codigo
-  return this.http.get<Tablet>(url);;
+  return this.http.get<Tablet>(url);
 }
 //----------
 listTabletPrestamo(id:number) : Observable<RTablet>{
@@ -91,6 +91,12 @@ listTabletPrestamo(id:number) : Observable<RTablet>{
   return this.http.get<RTablet>(url);
 }
 
+//---------------------------------------
+verificarTabletEst(codigo: number, nombreT: String): Observable<any>{
+  let url="http://localhost:8080/Aplicacion/rs/contactos/verificarTabletEst?id="+codigo+"&nombreT="+nombreT;
+  console.log(url)
+  return this.http.get<Tablet>(url);
+}
 
 
 }

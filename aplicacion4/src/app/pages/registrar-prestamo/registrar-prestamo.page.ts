@@ -63,40 +63,52 @@ export class RegistrarPrestamoPage{
   guardarRT(){
     console.log(this.tablet)
     this.tablet.tablet = this.tablet2;
-    this.tabletWS.insertarTabletR(this.tablet).subscribe(data=>{
-      console.log(data)
-      console.log("-----------")
-        if(data==true){
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'La tablet a sido registrada con exito',
-            showConfirmButton: false,
-            heightAuto: false,
-            timer: 1500
+    //console.log(this.tabletWS.verificarTabletEst(this.tablet.estudiante.id,this.tablet.tablet.nombre))
+    console.log(this.tablet.estudiante.id)
+    console.log(this.tablet.tablet.nombre)
+    this.tabletWS.verificarTabletEst(this.tablet.estudiante.id,this.tablet.tablet.nombre).subscribe(data1=>{
+      console.log(data1)
 
+      //-----------
+if(data1==true){
+  this.tabletWS.insertarTabletR(this.tablet).subscribe(data=>{
+    console.log(data)
+    console.log("-----------")
+      if(data==true){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'La tablet a sido registrada con exito',
+          showConfirmButton: false,
+          heightAuto: false,
+          timer: 1500
+        })
+        this.tablet.observaciones='';
+        this.tablet.estado ='';
+        this.tablet.estadoTxt='';
+        this.tablet.fecha = new Date();
+        this.tablet.materia.id=0;
+        this.tablet.estudiante.id=0;
+        this.tablet.tablet.id=0;
 
-          })
-          this.tablet.observaciones='';
-          this.tablet.estado ='';
-          this.tablet.estadoTxt='';
-          this.tablet.fecha = new Date();
-          this.tablet.materia.id=0;
-          this.tablet.docente.id=0;
-          this.tablet.estudiante.id=0;
-          this.tablet.tablet.id=0;
+      }
+  }) 
+}else{
+  Swal.fire({
+    position: 'center',
+    icon: 'error',
+    title: 'La tablet no es del estudiante',
+    showConfirmButton: false,
+    heightAuto: false,
+    timer: 1500
+  })
+}
+ 
+    })
 
-        }else{
-          Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'El registro cuenta con datos invalidos',
-            showConfirmButton: false,
-            heightAuto: false,
-            timer: 1500
-          })
-        }
-    })     
+    
+
+   
   }
 
   escanerActivo = false;

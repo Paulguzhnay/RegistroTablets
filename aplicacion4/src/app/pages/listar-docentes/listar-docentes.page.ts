@@ -36,7 +36,7 @@ export class ListarDocentesPage implements OnInit {
         let dimension = this.materiasU.length
         console.log(dimension)
         console.log(this.materiasU)
-        console.log(this.materiasU[0].id)
+        console.log(this.materiasU.id)
         let i = 0;
         let datosU: MateriaWS = new MateriaWS(); 
         while(i < dimension){
@@ -47,8 +47,11 @@ export class ListarDocentesPage implements OnInit {
 
           datosU.nombre = this.materiasU[i].nombre;
 
-          
-          this.materiaService.update(datosU);
+          if(i<dimension){
+            this.materiaService.update(datosU);
+            console.log("Hola ",i)
+
+          }
           i+=1;
         }
         

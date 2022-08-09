@@ -5,7 +5,7 @@
     <!-- Css -->
     <link rel="stylesheet" href="menu-principal.component.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i,700,700i" rel="stylesheet">
-    <title>Forms | Tailwind Admin</title>
+ 
 </ion-header>
 
 <ion-content>
@@ -19,7 +19,7 @@
               <div class="flex justify-between">
                   <div class="p-1 mx-3 inline-flex items-center">
                       <i class="fas fa-bars pr-2 text-white" onclick="sidebarToggle()"></i>
-                      <h1 class="text-white p-2">Logo</h1>
+                      <h1 class="text-white p-2"> Bienvenido Administrador</h1>
                   </div>
                   <div class="p-1 flex flex-row items-center">
           
@@ -48,7 +48,7 @@
                       
                           <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                               <div class="bg-gray-200 px-2 py-3 border-solid border-gray-200 border-b">
-                                  Registrar Estudiante
+                                  Registrar Prestamo
                               </div>
                               <div class="p-3">
                                   <form class="w-full">
@@ -59,9 +59,7 @@
                                                  for="carrera">
                                               Fecha
                                           </label>
-                                          <input type="date" id="fecha" name="fecha"
-                                          value="2022-07-02"
-                                          min="2022-07-01" max="2040-12-31" [(ngModel)]="tablet.fecha">
+                                          <input type="date" id="fecha" name="fecha" [(ngModel)]="tablet.fecha">
 
                                       </div>
                                       <br>
@@ -230,11 +228,11 @@
                   </div>
               <!--/Main-->
           </div>
-          <!--Footer-->
-          <footer class="bg-grey-darkest text-white p-2">
-              <div class="flex flex-1 mx-auto">&copy; My Design</div>
-          </footer>
-          <!--/footer-->
+        <!--Footer-->
+        <footer class="bg-grey-darkest text-white p-2">
+            <div class="flex flex-1 mx-auto">Carrera de Educación-Universidad Politécnica Salesiana </div>
+        </footer>
+        <!--/footer-->
   
       </div>
   
