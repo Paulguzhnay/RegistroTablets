@@ -7,6 +7,7 @@ import javax.ejb.Local;
 
 import model.Docente;
 import model.Estudiante;
+import model.TabletsR;
 
 @Local
 public interface EstudianteONLocal {
@@ -16,5 +17,8 @@ public interface EstudianteONLocal {
 	public List<Estudiante> getEstudiantesR(int id);
 	public void delete(int id);
 	public Estudiante buscarEstudiante(int id);
+	public List<Estudiante> verficarTabletEst(int id);
+	public List<TabletsR> verficarTabletEstReg(int id);
+	public List<Estudiante> TabletEstudianteRegistrada(int id);
 }
 

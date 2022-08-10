@@ -42,4 +42,19 @@ public class EstudianteON implements EstudianteONLocal{
 		return daoestudiante.read(id);
 	}
 	
+	public List<Estudiante> verficarTabletEst(int id) {
+		System.out.println("ON "+id);
+		return daoestudiante.getListEstVerTablet(id);
+	}	
+
+	public List<TabletsR> verficarTabletEstReg(int id) {
+		return daoestudiante.getListTabletRegistro(id);
+	}
+	
+	
+	public List<Estudiante> TabletEstudianteRegistrada(int id) {
+		System.out.println("ON "+id);
+		return daoestudiante.obtenerTabletIDEstudiante(id);
+	}	
+
 }

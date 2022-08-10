@@ -27,11 +27,6 @@ public class Tablets implements Serializable{
 	@Column(name="tab_codigo")
 	String codigo;
 
-	
-
-	
-	
-	
 	// Getters y Setters
 	public int getId() {
 		return id;

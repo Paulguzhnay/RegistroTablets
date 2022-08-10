@@ -24,8 +24,7 @@ public class Docente implements Serializable{
 	String apellido;
 	@Column(name="doc_correo")
 	String correo;
-	@Column(name="doc_asignatura")
-	String asignatura;
+
 	
 	//Getters and setters
 	public int getId() {
@@ -52,17 +51,12 @@ public class Docente implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public String getAsignatura() {
-		return asignatura;
-	}
-	public void setAsignatura(String asignatura) {
-		this.asignatura = asignatura;
-	}
 	@Override
 	public String toString() {
-		return "Docente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo
-				+ ", asignatura=" + asignatura + "]";
+		return "Docente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + "]";
 	}
+
+
 	
 	
 

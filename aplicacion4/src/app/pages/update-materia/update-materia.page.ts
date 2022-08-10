@@ -62,14 +62,17 @@ export class UpdateMateriaPage implements OnInit {
   guardarMateria(){
     this.materiaService.update(this.materia).subscribe(data=>{
       console.log(data)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'La materia ha sido actualizada exitosamente',
+        showConfirmButton: false,
+        heightAuto: false,
+        timer: 8500
+  
+      });
     })
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'La materia ha sido actualizada exitosamente',
-      
-      timer:8500
-    })
+
   
   //window.location.href="Listar-Materia.html"
 

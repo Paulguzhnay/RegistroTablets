@@ -58,18 +58,18 @@
                               <tr>
           
           
-                                <th style="width: 100px; color: white; background-color: #004E7C;" scope="col">id</th>
+
                                           <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">nombre Materia</th>
                                           <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Nombre Docente</th>
-                                          <th style="width: 200px; text-align: center; color: white; background-color: #004E7C;" colspan="2" scope="col">Opciones</th>
+                                          <th style="width: 200px; text-align: center; color: white; background-color: #004E7C;" scope="col">Opciones</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let materia of materias | async" scope="row">
           
-                                <td>{{materia.id}}</td>
-                                              <td>{{materia.nombre}}</td>
-                                              <td>{{materia.docente.nombre}} {{materia.docente.apellido}}</td>
+
+                                              <td style="color: black;">{{materia.nombre}}</td>
+                                              <td style="color: black;">{{materia.docente.nombre}} {{materia.docente.apellido}}</td>
                                               
                                               <td>   
                                                   <button class="bg-gray-200 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" style="color: white;">

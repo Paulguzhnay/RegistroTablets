@@ -17,5 +17,7 @@ public interface MateriaONLocal {
 	public List <Materia> getListMateria();
 	public void eliminar(int id);
 	public Materia getMateriaDatos(int id);
+	public List <Materia> getListMateriaDocente(int id);
+	
 }
 

@@ -21,6 +21,7 @@ public class MateriaDAO {
 	}
 	
 	public void update(Materia  mat) {
+		System.out.println("DAO "+ mat);
 		em.merge(mat);
 	}
 	
@@ -46,11 +47,20 @@ public class MateriaDAO {
 		return listado;
 		
 	}
+
+	public List<Materia> getListaMateriaDocente(int id){
+		List<Materia> listado= new ArrayList<Materia>();
+		String jpql ="SELECT mat FROM Materia mat WHERE mat.docente.id=?1";
+		Query query=em.createQuery(jpql, Materia.class);
+		query.setParameter(1, id);
+		listado=query.getResultList();		
+		return listado;
+	}
+	
 	
 	public List<Materia> getListMateria(){
 		
 		List<Materia> listado= new ArrayList<Materia>();
-		
 		String jpql ="SELECT mat FROM Materia mat ";
 		Query query=em.createQuery(jpql, Materia.class);
 		listado=query.getResultList();		

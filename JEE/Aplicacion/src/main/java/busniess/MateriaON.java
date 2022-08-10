@@ -31,7 +31,10 @@ public class MateriaON implements MateriaONLocal{
 	public  Materia getMateriaDatos(int id){		
 		return daoMateria.read(id);
 	}
-
+	
+	public List <Materia> getListMateriaDocente(int id){
+		return daoMateria.getListaMateriaDocente(id);
+	}
 	
 	public List <Materia> getListMateria(){
 		return daoMateria.getListMateria();
@@ -39,6 +42,7 @@ public class MateriaON implements MateriaONLocal{
 	
 	
 	public void update(Materia mat) {
+		System.out.println("MATERIA ON "+mat);
 		daoMateria.update(mat);
 	}
 	public void eliminar(int id) {

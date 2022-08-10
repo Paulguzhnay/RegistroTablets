@@ -33,6 +33,9 @@ public class Estudiante implements Serializable{
 	@Column(name="est_periodoA")
 	String periodoAcademico;
 	
+	@Column(name = "tablet_id")
+	String codTablet;
+	
 	@ManyToOne
 	@JoinColumn(name = "mat_id")
 	private Materia materia;
@@ -84,11 +87,22 @@ public class Estudiante implements Serializable{
 	public void setPeriodoAcademico(String periodoAcademico) {
 		this.periodoAcademico = periodoAcademico;
 	}
+	
+	
+	
+	public String getCodTablet() {
+		return codTablet;
+	}
+	public void setCodTablet(String codTablet) {
+		this.codTablet = codTablet;
+	}
 	@Override
 	public String toString() {
 		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", carrera=" + carrera
-				+ ", asignatura=" + asignatura + ", periodoAcademico=" + periodoAcademico +  "]";
+				+ ", asignatura=" + asignatura + ", periodoAcademico=" + periodoAcademico + ", codTablet=" + codTablet
+				+ ", materia=" + materia + "]";
 	}
+
 
 	
 }

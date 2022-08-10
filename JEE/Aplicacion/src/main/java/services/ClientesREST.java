@@ -22,7 +22,6 @@ import busniess.MateriaONLocal;
 import busniess.UsuarioONLocal;
 
 import busniess.TabletONLocal;
-import model.Docente;
 import model.*;
 
 @Path("contactos")
@@ -66,8 +65,7 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public String guardarDocente(Docente d) {
-			System.out.println("********************************");
-			System.out.println(d+"********");
+
 			try {
 				docenteLocal.insertar(d);
 				return "OK";
@@ -87,11 +85,11 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public String guardarEstudiante(Estudiante est) {
-			System.out.println("----"+est.toString());
 			listMateria=materiaLocal.getMateria(est.getAsignatura());
 			m.setId(listMateria.get(0).getId());
 			m.getId();
 			est.setMateria(m);
+			System.out.println(est);
 			try {
 				estudianteLocal.insertar(est);
 				return "OK";
@@ -110,7 +108,7 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void eliminar(@QueryParam("id") int id ) {
-		System.out.println("hola"+id);
+
 		estudianteLocal.delete(id);
 	}
 	
@@ -121,8 +119,6 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Docente getDocente(@QueryParam("id") int id){
 		Docente docente = docenteLocal.buscarDocente(id);
-		System.out.println("-----------------------*********************");
-		System.out.println(docente);
 		return docente;
 	}
 	
@@ -133,8 +129,6 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Estudiante getEstudianteID(@QueryParam("id") int id){
 		Estudiante estudiante = estudianteLocal.buscarEstudiante(id);
-		System.out.println("-----------------------*********************");
-		System.out.println(estudiante);
 		return estudiante;
 	}
 	
@@ -147,10 +141,6 @@ public class ClientesREST {
 			
 		
 		int id  = mat.getDocente().getId();
-		System.out.println(id);	
-		
-		System.out.println("/////////////////////");
-		System.out.println(mat);
 		try {
 				materiaLocal.insertar(mat);
 				return "OK";
@@ -170,22 +160,21 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public List<Materia> getMateria(){
 		List<Materia> materia = materiaLocal.getListMateria();
-		System.out.println(materia);
 		return materia;
 	}
 	
-	
 	//Actualizar Materia
 	@POST
-	@Path("actualizarMateria")
+	@Path("actMat")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void updateMateria(Materia mat) {
-		System.out.println("hola");
-		System.out.println("***"+mat);
-		System.out.println("hola");
+		System.out.println(mat);
+		System.out.println("---------------------");
+		System.out.println(mat.getNombre());
 		materiaLocal.update(mat);
 	}
+
 	
 	//Eliminar Docente
 	//Eliminar Materia
@@ -194,7 +183,6 @@ public class ClientesREST {
 		@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 		@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 		public void eliminarDocente(@QueryParam("id") int id ) {
-			System.out.println("hola"+id);
 			docenteLocal.delete(id);
 		}
 	
@@ -204,7 +192,7 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void eliminarMateria(@QueryParam("id") int id ) {
-		System.out.println("hola"+id);
+		
 		materiaLocal.eliminar(id);
 	}
 //Buscar Materia
@@ -215,10 +203,20 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Materia getMateriaID(@QueryParam("id") int id){
 		Materia materia = materiaLocal.getMateriaDatos(id);
-		System.out.println("-----------------------*********************");
-		System.out.println(materia);
 		return materia;
 	}
+	
+	//Buscar Materia por docente
+	@GET
+	@Path("buscarMateriaDocente")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<Materia> getMateriaDocente(@QueryParam("id") int id){
+		List<Materia> materias = materiaLocal.getListMateriaDocente(id);
+		return materias;
+	}
+	
+	
 	
 	//JAPON
 	//Registrar Usuarios colaboradores
@@ -228,8 +226,7 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public String guardarUsuario(Usuario usuario) {
 			
-			System.out.println(usuario);
-			System.out.println("Entro en el POST PARA GUARDAR");
+
 			try {
 				usuarioLocal.insertar(usuario);
 
@@ -249,18 +246,17 @@ public class ClientesREST {
 	@Path("Login")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public boolean getUsuarios(@QueryParam("correo")String correou, @QueryParam("password")String passwordu){
-		System.out.println("CONRREO "+correou);
-		System.out.println("password "+passwordu);
+
 		List<Usuario> usuarios = usuarioLocal.getUsuarios(correou, passwordu);
 		
-		System.out.println(usuarios.size());
+
 		boolean bandera=false;
 		if (usuarios.size()==1) {
 			bandera=true;
 			return bandera;
 		}
 		
-		System.out.println("--------------------"+usuarios);
+
 		
 		return bandera;
 	}
@@ -308,6 +304,9 @@ public class ClientesREST {
 		estudiantesON.update(op);
 	}
 	
+
+	
+	//------------------------------------------------------
 	//Docentes
 	@POST
 	@Path("ingresarDocente")
@@ -366,8 +365,7 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public String guardarDocente(Tablets t) {
-			System.out.println("********************************");
-			System.out.println(t+"********");
+
 			try {
 				tabletON.insertar(t);
 				return "OK";
@@ -410,50 +408,94 @@ public class ClientesREST {
 	@Path("estudiantesT")
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public List<Estudiante> getEstudiantesM(@QueryParam("id") int id){
-		System.out.println("****************** "+id);
 		return estudiantesON.getEstudiantesR(id);
 	}
-	
+	//-------------------------------
+	@GET
+	@Path("listTabletsVerificadas")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public TabletsR getTabletsR(@QueryParam("id") int id){
+		TabletsR modeloR= tabletON.getListTabletsVerificada(id);
+		System.out.println(id);
+		System.out.println("----------------");
+		System.out.println(modeloR);
+		return modeloR;
+	}
+	//-----------------------------------------------------------
 	@POST
 	@Path("InsertarTR")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	public String guardarRegistroEstTablet(TabletsR tabR) {
-		
-			try {
-				System.out.println("*********"+tabR.toString());
-				tabletON.insertar(tabR);
-				return "OK";
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		
-		return "no felicidades";
+	public boolean guardarRegistroEstTablet(TabletsR tabR) {
+		boolean bandera = false;
+		try {
+			tabletON.insertarTR(tabR);
+			bandera = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bandera;
 	}
-	
+			
 	//----------------------------------------
 	@POST
 	@Path("actualizarPrestamo")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	public void updateEstudiante(TabletsR tabR) throws Exception {
+	public void updateTabletRegistro(TabletsR tabR) throws Exception {
+		System.out.println("ACTUALIZAR PRESTAMO ");
+		System.out.println(tabR);
 		tabletON.updateR(tabR);
 	}
 	
+	
+	
+	@GET
+	@Path("verficarTabletsPrestadas")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<TabletsR> getTabletP(){
+		return tabletON.getTabletsPrestadas();
+	}
+	//--------------------
 	//Verificar Tablet
 	@GET
 	@Path("verificarTablet")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Tablets getTabletVerificada(@QueryParam("codigo") String codigo){
+		System.out.println(codigo.length());
 		Tablets tablet = tabletON.verificar(codigo);
-		System.out.println("-----------------------*********************");
-		System.out.println(tablet);
+		System.out.println(tablet.toString());
 		return tablet;
 	}
-		
+// METODOS PARA EL LIST-ESTUDIANTE
+	//--------------------
+	//---------------------------------------------------
+	@GET
+	@Path("estudiantesPrestamos")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public List<TabletsR> getEstudiantesPrestamo(@QueryParam("id") int id){
+		return estudiantesON.verficarTabletEstReg(id);
+	}
+	
+	//----------------------------
+	@GET
+	@Path("verificarTabletEst")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public boolean verificarTabletRegistradaEst(@QueryParam("id") int id, @QueryParam("nombreT") String nombreT ){
+		List<Estudiante> estT=new ArrayList<Estudiante>();
+		boolean bandera=false;
+		System.out.println(id);
+		System.out.println(nombreT);
+		estT=estudiantesON.TabletEstudianteRegistrada(id);
+		System.out.println(estT);
+		if(estT.get(0).getCodTablet().equals(nombreT)) {
+			bandera=true;
+		}
+		System.out.println(bandera);
+		return bandera;
+	}
 }
 
 	

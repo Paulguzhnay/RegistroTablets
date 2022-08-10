@@ -58,22 +58,22 @@
                               <tr>
           
           
-                                <th style="width: 200px;" scope="col">Fecha</th>
-                                          <th style="width: 200px;" scope="col">Estudiante</th>
-                                          <th style="width: 200px;" scope="col">Observaciones</th>
-                                          <th style="width: 200px;" scope="col">Estado</th>
-                                          <th style="width: 200px;" scope="col">¿A quíen?</th>
-                                          <th style="width: 200px; text-align: center;" colspan="2" scope="col">Devolver</th>
+                                <th style="width: 200px; color: white; background-color: #004E7C; " scope="col">Fecha</th>
+                                          <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Estudiante</th>
+                                          <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Observaciones</th>
+                                          <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">Estado</th>
+                                          <th style="width: 200px; color: white; background-color: #004E7C;" scope="col">¿A quíen?</th>
+                                          <th style="width: 200px ; color: white; background-color: #004E7C; text-align: center;" colspan="2" scope="col">Devolver</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr *ngFor="let tablet of tabletsP | async">
           
                                 <td>{{tablet.fecha}}</td>
-                                              <td>{{tablet.estudiante.nombre}} {{tablet.estudiante.apellido}}</td>
-                                              <td>{{tablet.observaciones}}</td>
-                                              <td>{{tablet.estado}}</td>
-                                              <td>{{tablet.estadoTxt}}</td>
+                                              <td style="color: black;">{{tablet.estudiante.nombre}} {{tablet.estudiante.apellido}}</td>
+                                              <td style="color: black;">{{tablet.observaciones}}</td>
+                                              <td style="color: black;">{{tablet.estado}}</td>
+                                              <td style="color: black;">{{tablet.estadoTxt}}</td>
                                               <td>   
                                                   <button class="bg-gray-200 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center" style="color: white;">
                                                       

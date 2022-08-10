@@ -22,7 +22,7 @@ public class TabletON implements TabletONLocal {
 		daoTablet.insert(t);
 	}
 	
-	public void insertar(TabletsR tR)throws Exception{
+	public void insertarTR(TabletsR tR)throws Exception{
 		daoTablet.insertTR(tR);
 	}
 	
@@ -43,5 +43,22 @@ public class TabletON implements TabletONLocal {
 	public Tablets verificar(String codigo) {
 		return daoTablet.read2(codigo);
 	}
+//--------------------
+	public List <TabletsR> getTabletsPrestadas(){
+		return daoTablet.getListTabletsPres();
+	}
+//-----------
+	public List <Tablets> getTabletsVerificada(String nombre){
+		return daoTablet.getListtVerTablet(nombre);
+	}
+	//-----------
+		public TabletsR getListTabletsVerificada(int id){
+			return daoTablet.readRegistro(id);
+		}
+		//-----------
+		public TabletsR getListEstudiantesRegistro(int id){
+			return daoTablet.readRegistroEstudiantes(id);
+		}	
 
+	
 }

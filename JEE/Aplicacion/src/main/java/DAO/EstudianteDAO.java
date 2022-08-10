@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import model.Estudiante;
+import model.TabletsR;
 
 @Stateless
 public class EstudianteDAO {
@@ -50,4 +51,37 @@ public class EstudianteDAO {
 		listado=query.getResultList();
 		return listado;	
 	}
+
+//----------------------------
+	public List<Estudiante> getListEstVerTablet(int id){
+		List<Estudiante> listado= new ArrayList<Estudiante>();
+		System.out.println("DAO "+id);
+		String jpql ="SELECT est FROM Estudiante est WHERE est.id=?1";
+		Query query=em.createQuery(jpql, Estudiante.class);
+		query.setParameter(1, id);
+		listado = query.getResultList();
+		return listado;	
+	}
+
+	//-----------------------------------------------------
+	public List<TabletsR> getListTabletRegistro(int id){
+		List<TabletsR> listado= new ArrayList<TabletsR>();
+		String jpql ="SELECT tabr FROM TabletsR tabr WHERE tabr.estudiante.id=?1";
+		Query query=em.createQuery(jpql, TabletsR.class);
+		query.setParameter(1, id);
+		listado = query.getResultList();
+		return listado;	
+	}
+	
+	//--------------------------------------------------------
+	
+	public List<Estudiante> obtenerTabletIDEstudiante(int id){
+		List<Estudiante> listado= new ArrayList<Estudiante>();
+		String jpql ="SELECT est FROM Estudiante est WHERE est.id=?1";
+		Query query=em.createQuery(jpql, Estudiante.class);
+		query.setParameter(1, id);
+		listado = query.getResultList();
+		return listado;	
+	}
+	
 }
