@@ -28,17 +28,31 @@ export class InsertTabletsPage implements OnInit {
         heightAuto: false
       })
     } else {
-      this.TabletService.registrarTablet(this.TabletGrupo).subscribe(data=>{
-        console.log(data)
-      })
-   
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'La tablet ha sido creada exitosamente',
-        showConfirmButton: false,
-        heightAuto: false,
-        timer: 1500
+      this.TabletService.verificarTabRegistrado(this.TabletGrupo.nombre).subscribe(dataV=>{
+        if(dataV==true){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error de Registro',
+            text: 'La tablet ya se encuentra registrado',
+            heightAuto: false,
+            timer:8500
+          })
+        }else{
+          this.TabletService.registrarTablet(this.TabletGrupo).subscribe(data=>{
+
+          })
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'La tablet ha sido creada exitosamente',
+            showConfirmButton: false,
+            heightAuto: false,
+            timer: 1500
+          })
+    
+        }
+
       })
       this.TabletGrupo.codigo=''
       this.TabletGrupo.laboratorio=''

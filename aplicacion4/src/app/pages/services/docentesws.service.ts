@@ -46,4 +46,13 @@ export class DocenteswsService {
     return this.http.get<DocenteWS>(url);
  }
 
+ verificarDocente(nombre: String, apellido:String ):Observable<any>{
+
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarDocRegistrado?nombre="+nombre+"&apellido="+apellido
+  let url=uri
+  console.log(url)
+  return this.http.get<DocenteWS>(url);
+}
+
+ 
 }

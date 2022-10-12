@@ -59,7 +59,7 @@ public List<Usuario> getAdmin(String correo, String password){
 		query.setParameter(1, correo);
 		query.setParameter(2, password);
 		listado=query.getResultList();
-		System.out.println("listado +"+listado);
+
 		return listado;
 		
 	}

@@ -49,8 +49,8 @@ export class UpdateDocentePage implements OnInit {
       position: 'center',
       icon: 'success',
       title: 'Docente Actualizado',
-      
-      timer:8500
+      showConfirmButton: false,
+      timer:9500
     })
 
     window.location.href="/listar-docentes"

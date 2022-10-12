@@ -21,39 +21,44 @@ export class RegistrarDocentePage implements OnInit {
   }
 
   guardarD(){
-
     if (this.docente.nombre==""||this.docente.apellido==""||this.docente.correo=="") {
-      
       Swal.fire({
+        position: 'center',
         icon: 'error',
         title: 'Oops...',
         text: 'Datos Vacios',
+        heightAuto: false,
+        timer:8500
       })
-    } 
-    
-  else {
-    this.docenteWS.registrarDocente(this.docente).subscribe(data=>{
-      console.log(data)
+    }else{
+    this.docenteWS.verificarDocente(this.docente.nombre,this.docente.apellido).subscribe(dataD=>{
+      if(dataD==true){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error de Registro',
+          text: 'El Docente ya se encuentra registrado',
+          heightAuto: false,
+          timer:8500
+        })
+      } else{
+      this.docenteWS.registrarDocente(this.docente).subscribe(data=>{
 
-    })
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Docente creado exitosamente',
-        showConfirmButton: false,
-        timer: 1500
+        Swal.fire({
+          position:'center',
+          icon:'success',
+          title:'Docente creado con exito',
+          heightAuto: false,
+          timer:1500
+        })
       })
-      this.docente.nombre=''
-      this.docente.apellido=''
-
-      this.docente.correo=''
-    } 
-    
+    }
+    })  
+    }
   }
 
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
-    console.log("Hola");
-    console.log("Hola2"+this.docenteWS.getMaterias());
+ 
   }
 }

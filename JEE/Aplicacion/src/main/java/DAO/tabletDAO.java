@@ -59,7 +59,7 @@ public class tabletDAO {
 		query.setParameter(1, codigo);
 		listado=query.getResultList();
 		
-		System.out.println(listado.toString());
+
 		Tablets t = listado.get(0);
 		return t;	
 	}

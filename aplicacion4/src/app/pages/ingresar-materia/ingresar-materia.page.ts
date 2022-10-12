@@ -31,20 +31,37 @@ export class IngresarMateriaPage implements OnInit {
           icon: 'error',
           title: 'Oops...',
           text: 'Datos Vacios',
+          heightAuto: false,
+          timer:8500
+
         })
       } 
-      
       else {
-      this.materiaWS.registrarMateria(this.materia).subscribe(data=>{
-        console.log(data)
-      })   
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'La materia ha sido creada exitosamente',
-          showConfirmButton: false,
-          timer: 1500
+        this.materiaWS.verificarMateria(this.materia.nombre,this.materia.docente.id).subscribe(dataV=>{
+          if(dataV==true){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Materia ya registrada',
+              heightAuto: false,
+              timer:8500
+    
+            })  
+          }else{
+            this.materiaWS.registrarMateria(this.materia).subscribe(data=>{
+              console.log(data)
+            })   
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'La materia ha sido creada exitosamente',
+                showConfirmButton: false,
+                heightAuto: false,
+                timer: 1500
+              })
+          }
         })
+
         this.materia.nombre=''
         this.materia.docente.id=0      
       }

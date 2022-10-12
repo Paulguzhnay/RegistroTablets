@@ -38,8 +38,8 @@ export class UpdateTabletsPage implements OnInit {
       position: 'center',
       icon: 'success',
       title: 'La tablet ha sido actualizada exitosamente',
-      
-      timer:8500
+      showConfirmButton: false,
+      timer:9500
     })
 
   window.location.href="/list-tablets"

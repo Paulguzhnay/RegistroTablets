@@ -28,7 +28,7 @@ public class UsuarioON implements UsuarioONLocal {
 		//daousuario.delete(0);
 		Usuario us =daousuario.read(u.getId());
 		if(us==null)
-			System.out.println("Metodo de exception");
+
 		else
 			daousuario.delete(null);;
 	}

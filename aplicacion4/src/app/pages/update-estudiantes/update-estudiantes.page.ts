@@ -55,8 +55,8 @@ export class UpdateEstudiantesPage implements OnInit {
       position: 'center',
       icon: 'success',
       title: 'Estudiante Actualizado',
-      
-      timer:8500
+      showConfirmButton: false,
+      timer:9500
     })
 
     window.location.href="/listar-estudiantes"

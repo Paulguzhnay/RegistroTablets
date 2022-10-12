@@ -42,7 +42,7 @@ public class MateriaON implements MateriaONLocal{
 	
 	
 	public void update(Materia mat) {
-		System.out.println("MATERIA ON "+mat);
+
 		daoMateria.update(mat);
 	}
 	public void eliminar(int id) {

@@ -21,7 +21,7 @@ public class MateriaDAO {
 	}
 	
 	public void update(Materia  mat) {
-		System.out.println("DAO "+ mat);
+
 		em.merge(mat);
 	}
 	

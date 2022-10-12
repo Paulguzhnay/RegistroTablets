@@ -55,5 +55,10 @@ export class MateriawsService {
     let url=uri+id
     return this.http.get<MateriaWS>(url);
  }
+ verificarMateria(nombre:String, id:number) :Observable<any>{
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarMatRegistrado?nombre="+nombre+"&idD="+id
+  let url=uri
+  return this.http.get<MateriaWS>(url);
+}
 
 }

@@ -55,7 +55,7 @@ public class EstudianteDAO {
 //----------------------------
 	public List<Estudiante> getListEstVerTablet(int id){
 		List<Estudiante> listado= new ArrayList<Estudiante>();
-		System.out.println("DAO "+id);
+
 		String jpql ="SELECT est FROM Estudiante est WHERE est.id=?1";
 		Query query=em.createQuery(jpql, Estudiante.class);
 		query.setParameter(1, id);

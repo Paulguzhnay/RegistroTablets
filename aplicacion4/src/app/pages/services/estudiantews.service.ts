@@ -52,11 +52,25 @@ export class EstudiantewsService {
 }
 //
 estudiantesRegistroTablet (id: Number):Observable<RTablet>{
-
   let uri="http://localhost:8080/Aplicacion/rs/contactos/estudiantesPrestamos?id="
   let url=uri+id
   console.log(url)
   return this.http.get<RTablet>(url);
+}
+
+verificarEstRegistrado (nombre: String, apellido: String, carrera:String):Observable<any>{
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarEstRegistrado?nombre="+nombre+"" +"&apellido="+apellido+"&carrera="+carrera
+  let url=uri
+
+  console.log("URL",url)
+  return this.http.get<any>(url);
+}
+
+verificarTabRegistrado (nombre: String):Observable<any>{
+  let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarTabRegistrado?nombre="+nombre
+  let url=uri
+  console.log("URL",url)
+  return this.http.get<any>(url);
 }
 }
 

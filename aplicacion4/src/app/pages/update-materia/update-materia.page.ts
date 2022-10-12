@@ -68,7 +68,7 @@ export class UpdateMateriaPage implements OnInit {
         title: 'La materia ha sido actualizada exitosamente',
         showConfirmButton: false,
         heightAuto: false,
-        timer: 8500
+        timer: 9500
   
       });
     })

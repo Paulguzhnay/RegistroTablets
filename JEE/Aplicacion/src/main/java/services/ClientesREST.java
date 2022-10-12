@@ -2,6 +2,7 @@ package services;
 
 import java.awt.PageAttributes.MediaType;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,6 +19,7 @@ import javax.ws.rs.QueryParam;
 
 import busniess.DocenteONLocal;
 import busniess.EstudianteONLocal;
+import busniess.MateriaON;
 import busniess.MateriaONLocal;
 import busniess.UsuarioONLocal;
 
@@ -89,7 +91,7 @@ public class ClientesREST {
 			m.setId(listMateria.get(0).getId());
 			m.getId();
 			est.setMateria(m);
-			System.out.println(est);
+
 			try {
 				estudianteLocal.insertar(est);
 				return "OK";
@@ -169,9 +171,7 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void updateMateria(Materia mat) {
-		System.out.println(mat);
-		System.out.println("---------------------");
-		System.out.println(mat.getNombre());
+
 		materiaLocal.update(mat);
 	}
 
@@ -416,9 +416,7 @@ public class ClientesREST {
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public TabletsR getTabletsR(@QueryParam("id") int id){
 		TabletsR modeloR= tabletON.getListTabletsVerificada(id);
-		System.out.println(id);
-		System.out.println("----------------");
-		System.out.println(modeloR);
+
 		return modeloR;
 	}
 	//-----------------------------------------------------------
@@ -444,8 +442,8 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public void updateTabletRegistro(TabletsR tabR) throws Exception {
-		System.out.println("ACTUALIZAR PRESTAMO ");
-		System.out.println(tabR);
+
+
 		tabletON.updateR(tabR);
 	}
 	
@@ -464,9 +462,9 @@ public class ClientesREST {
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	public Tablets getTabletVerificada(@QueryParam("codigo") String codigo){
-		System.out.println(codigo.length());
+
 		Tablets tablet = tabletON.verificar(codigo);
-		System.out.println(tablet.toString());
+
 		return tablet;
 	}
 // METODOS PARA EL LIST-ESTUDIANTE
@@ -486,16 +484,99 @@ public class ClientesREST {
 	public boolean verificarTabletRegistradaEst(@QueryParam("id") int id, @QueryParam("nombreT") String nombreT ){
 		List<Estudiante> estT=new ArrayList<Estudiante>();
 		boolean bandera=false;
-		System.out.println(id);
-		System.out.println(nombreT);
+
 		estT=estudiantesON.TabletEstudianteRegistrada(id);
-		System.out.println(estT);
+
+
 		if(estT.get(0).getCodTablet().equals(nombreT)) {
 			bandera=true;
 		}
-		System.out.println(bandera);
+
 		return bandera;
 	}
+
+	//----------------------------------------------------------------------------------------------------------------------------
+	@GET
+	@Path("verificarEstRegistrado")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public boolean verificarEstRegistrado(@QueryParam("nombre") String nombre, @QueryParam("apellido") String apellido, 
+										  @QueryParam("carrera") String carrera ){
+		List<Estudiante> estT=new ArrayList<Estudiante>();
+		boolean bandera=false;
+		estT=estudiantesON.getEstudiantes();
+
+		for (int i = 0; i < estT.size(); i++) {
+
+			if(estT.get(i).getNombre().equals(nombre) && estT.get(i).getApellido().equals(apellido)
+				&& estT.get(i).getCarrera().equals(carrera)) {
+				return bandera=true;			
+			}
+		}
+	return bandera;
+	}
+	//----------------------------------------------------------------------------------------------------------------------------
+	@GET
+	@Path("verificarTabRegistrado")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public boolean verificarTabRegistrado(@QueryParam("nombre") String nombreT){
+		
+		List <Tablets> listTablet = new ArrayList<Tablets>();
+		listTablet=tabletON.getTablets();
+		boolean bandera=false;
+
+		
+		for (int i = 0; i < listTablet.size(); i++) {
+
+			if(listTablet.get(i).getNombre().equals(nombreT)) {
+				return bandera=true;			
+			}
+		}
+	return bandera;
+	}
+	
+	//VERIFICAR DOCENTE REGISTRADA
+	//----------------------------------------------------------------------------------------------------------------------------
+	@GET
+	@Path("verificarDocRegistrado")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public boolean verificarDocRegistrado(@QueryParam("nombre") String nombreD,@QueryParam("apellido") String apellidoD){
+		
+		List <Docente> listDocentes = new ArrayList<Docente>();
+		listDocentes=docentesON.getDocentes();
+		boolean bandera=false;
+
+		
+		for (int i = 0; i < listDocentes.size(); i++) {
+
+			if((listDocentes.get(i).getNombre().equalsIgnoreCase(nombreD)) && 
+				(listDocentes.get(i).getApellido().equalsIgnoreCase(apellidoD))) {
+				return bandera=true;			
+			}
+		}
+	return bandera;
+	}
+	
+	//VERIFICAR MATERIA REGISTRADA
+	@GET
+	@Path("verificarMatRegistrado")
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public boolean verificarMatRegistrado(@QueryParam("nombre") String nombreM,@QueryParam("idD") int codigoD){
+		
+		List <Materia> listMateria = new ArrayList<Materia>();
+		listMateria=materiaLocal.getListMateria();
+		boolean bandera=false;
+
+		
+		for (int i = 0; i < listMateria.size(); i++) {
+
+			if((listMateria.get(i).getNombre().equals(nombreM)) && 
+				(listMateria.get(i).getDocente().getId()==codigoD)) {
+				return bandera=true;			
+			}
+		}
+	return bandera;
+	}	
+
 }
 
 	

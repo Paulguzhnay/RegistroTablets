@@ -52,37 +52,50 @@ name:any;
   }
   guardar(){
     
-   /* if (this.estudiante.nombre==""||this.estudiante.apellido==""||this.estudiante.asignatura==""||this.estudiante.carrera==""||this.estudiante.periodoAcademico=="") {
-      
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Datos Vacios',
-      })
-    } */
-    /*
-  else {
-    this.docenteWS.registrarDocente(this.docente).subscribe(data=>{
-      console.log(data)
-
-    })
+    this.estudianteWS.verificarTabRegistrado(this.estudiante.codTablet).subscribe(dataT=>{
+      console.log("BANDERA TABLET",dataT)
+      console.log("codigo ",this.estudiante.codTablet)
+      if(dataT==true){
+        this.estudianteWS.verificarEstRegistrado(this.estudiante.nombre,this.estudiante.apellido,this.estudiante.carrera).subscribe(data1=>{
+          console.log("BANDERA Estudiante",data1)
+          if(data1==true){
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Error',
+              text: 'Estudiante ya registrado',
+              heightAuto: false,
+              timer:8500
+            })
+          }
+          if(data1==false){
+            this.estudianteWS.registrarEstudiante(this.estudiante).subscribe(data=>{
+              console.log("-------------------------------------------")
+              console.log(this.estudiante)
+            })
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Estudiante Registrado con exito',
+              heightAuto: false,
+              timer:8500
+            })
+            window.location.href="/registrar-estudiante"
+        
+          }
+        })
+      }
       Swal.fire({
         position: 'center',
-        icon: 'success',
-        title: 'Docente creado exitosamente',
-        showConfirmButton: false,
-        timer: 1500
+        icon: 'error',
+        title: 'Error',
+        text: 'Tablet No Registrada',
+        heightAuto: false,
+        timer:8500
       })
-      this.docente.nombre=''
-      this.docente.apellido=''
-      this.docente.asignatura=''
-      this.docente.correo=''
-    } 
-    */
-    this.estudianteWS.registrarEstudiante(this.estudiante).subscribe(data=>{
-      console.log("-------------------------------------------")
-      console.log(this.estudiante)
+
     })
+
   }
   tablets:any
   cargarTablets(){
@@ -194,41 +207,36 @@ name:any;
   }
   verificar(){
     let codigo = this.resultadoEscaner.split("\n");
+    console.log(codigo.length);
 
+    let corte = codigo[0].split("\n");
+    console.log("***",corte[0].length)
+    console.log(codigo[0].length);
+    console.log(codigo[1]);
     if (codigo.length == 3){
+      let codigoTablet = codigo[2].split(" ");
+      console.log(codigoTablet[1]);
+      //this.TabletGrupo.nombre = codigo[0];
+      if(codigo[0].length==10){
       
-      console.log(codigo[0])
-      this.estudiante.codTablet = codigo[0]; 
-      this.tablet2 = this.tabletWS.verificarTablet(codigo[4]);
-      console.log("hola",codigo[0])
-      
-      if(this.tablet2 == null){
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Error',
-          text: 'Tablet no registrada',
-          heightAuto: false,
-          timer:8500
-        })
-      }else{
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Informacion de la Tablet',
-          text: this.resultadoEscaner,
-          heightAuto: false,
-          timer:8500
-        })
+        console.log("HOLA 10")
+        var nomC = codigo[0];
+        console.log("///",nomC.substring(0,9).length);
+        this.estudiante.codTablet = nomC.substring(0,9);      
+
+      }else if(codigo[0].length==9){
+        console.log("HOLA 9")
+        var nomC = codigo[0];
+        console.log("///",nomC.substring(0,8).length);
+        this.estudiante.codTablet = nomC.substring(0,8);      
       }
-      
 
     }else{
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'Error',
-        text: 'No es codigo QR de una tablet',
+        title: 'Error de Escaneo',
+        text: 'El Codigo escaneado no pertenece a ninguna tablet',
         heightAuto: false,
         timer:8500
       })
