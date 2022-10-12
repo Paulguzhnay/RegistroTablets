@@ -14,22 +14,22 @@ import Swal from 'sweetalert2';
 export class UpdateMateriaPage implements OnInit {
   materia: MateriaWS = new MateriaWS();
   materia2: MateriaWS = new MateriaWS();
-  
+
   materias: any;
 
 
 
   constructor(private materiaService: MateriawsService, private _route: ActivatedRoute) { }
-  
+
   id: string="";
   id1: number=0;
   docentes: any;
 
   ngOnInit(): void {
-    
+
     this.cargarDocentes()
     let id = this._route.snapshot.paramMap.get('id');
-    console.log(id)
+
     this.id = `${id}`
     this.id1==Number(this.id)
     this.materia.id=Number(this.id)
@@ -40,17 +40,16 @@ export class UpdateMateriaPage implements OnInit {
 
       this.materiaService.buscarMateria(this.materia.id).subscribe(data=>{
         this.materia2 = data;
-        console.log("3"+this.materia2.nombre+"4")
+
         this.materia.nombre=this.materia2.nombre
-       
+
     })
   }
 
 
   cargarDocentes(): void{
     this.docentes = this.materiaService.getDocentes();
-    console.log("Hola");
-    console.log("Hola2"+this.materiaService.getDocentes());
+
   }
 
 
@@ -61,7 +60,7 @@ export class UpdateMateriaPage implements OnInit {
 
   guardarMateria(){
     this.materiaService.update(this.materia).subscribe(data=>{
-      console.log(data)
+      
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -69,11 +68,11 @@ export class UpdateMateriaPage implements OnInit {
         showConfirmButton: false,
         heightAuto: false,
         timer: 9500
-  
+
       });
     })
 
-  
+
   //window.location.href="Listar-Materia.html"
 
   }

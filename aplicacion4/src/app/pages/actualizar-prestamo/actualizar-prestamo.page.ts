@@ -21,7 +21,7 @@ export class ActualizarPrestamoPage implements OnInit {
   constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,
     private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,
     private materiaWS: MateriawsService,
-    private _route: ActivatedRoute) {} 
+    private _route: ActivatedRoute) {}
 
   tablet: RTablet = new RTablet();
   tabletPrest: RTablet = new RTablet();
@@ -40,7 +40,7 @@ export class ActualizarPrestamoPage implements OnInit {
   }
   ngOnInit() {
     let idF = this._route.snapshot.paramMap.get('id');
-    console.log(idF);
+
     this.id = `${idF}`;
     this.id1==Number(this.id);
     this.tablet.id=Number(this.id)
@@ -53,9 +53,9 @@ export class ActualizarPrestamoPage implements OnInit {
   }
 
   buscarEstTablet(){
-    console.log("Num ",this.tablet.id);
+
     this.tabletWS.listTabletPrestamo(this.tablet.id).subscribe(data=>{
-        console.log(data);
+
         this.tabletPrest = data;
         this.tablet = this.tabletPrest
     });
@@ -64,14 +64,13 @@ export class ActualizarPrestamoPage implements OnInit {
   cargarDatosTablet(){
     this.tabletWS.listTabletPrestamo(this.tablet.id).subscribe(data=>{
       this.tabletPrest = data;
-      console.log(data)
+
   })
   }
 
   guardarDatos(): void{
     this.tabletWS.actualizarTabletR(this.tablet).subscribe(data=>{
-      console.log("----------------------------------")
-      console.log(data)
+      
     })
     Swal.fire({
       position: 'center',

@@ -11,8 +11,7 @@ export class DocenteswsService {
   constructor(private http:HttpClient) { }
   registrarDocente(docente:DocenteWS):Observable<any>{
     let url="http://localhost:8080/Aplicacion/rs/contactos/RegistroD";
-    console.log(url)
-    console.log(docente)
+
     return this.http.post<any>(url,docente);
   }
 
@@ -31,10 +30,10 @@ export class DocenteswsService {
     return this.http.post<any>(url,docente);
   }
 
-  eliminar(id: Number){  
+  eliminar(id: Number){
     let uri="http://localhost:8080/Aplicacion/rs/contactos/eliminarDocente?id="
     let url=uri+id
-    console.log(url)
+
     return this.http.delete(url);
   }
 
@@ -42,7 +41,7 @@ export class DocenteswsService {
 
     let uri="http://localhost:8080/Aplicacion/rs/contactos/buscarDocente?id="
     let url=uri+id
-    console.log(url)
+
     return this.http.get<DocenteWS>(url);
  }
 
@@ -50,9 +49,9 @@ export class DocenteswsService {
 
   let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarDocRegistrado?nombre="+nombre+"&apellido="+apellido
   let url=uri
-  console.log(url)
+  
   return this.http.get<DocenteWS>(url);
 }
 
- 
+
 }

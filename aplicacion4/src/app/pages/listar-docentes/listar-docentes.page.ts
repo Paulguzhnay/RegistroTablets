@@ -34,13 +34,11 @@ export class ListarDocentesPage implements OnInit {
       this.materiaService.buscarMateriaDocente(id).subscribe(data=>{
         this.materiasU = data;
         let dimension = this.materiasU.length
-        console.log(dimension)
-        console.log(this.materiasU)
-        console.log(this.materiasU.id)
+
         let i = 0;
-        let datosU: MateriaWS = new MateriaWS(); 
+        let datosU: MateriaWS = new MateriaWS();
         while(i < dimension){
-                
+
           datosU.docente = null;
 
           datosU.id = this.materiasU[i].id;
@@ -49,20 +47,19 @@ export class ListarDocentesPage implements OnInit {
 
           if(i<dimension){
             this.materiaService.update(datosU);
-            console.log("Hola ",i)
+
 
           }
           i+=1;
         }
-        
+
         /*this.docentes2.docente = null;
         this.materiaUpdate = this.docentes2.get
-        console.log("ACTUALIZADO")
-        console.log(this.materiaUpdate);
-        this.materiaService.update(this.materiaUpdate)*/
         
+        this.materiaService.update(this.materiaUpdate)*/
+
       });
-  
+
 
 
       //this.docenteService.eliminar(id).subscribe();

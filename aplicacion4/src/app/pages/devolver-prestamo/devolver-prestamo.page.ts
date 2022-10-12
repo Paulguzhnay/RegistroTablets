@@ -17,7 +17,7 @@ import { EstudianteWS } from 'src/app/domain/estudiantews';
 })
 export class DevolverPrestamoPage implements OnInit {
 
-  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {} 
+  constructor(private toasstCtrl: ToastController, private loadingCtrl: LoadingController,private tabletWS: ListTabletwsService,private docenteWS: DocenteswsService,private materiaWS: MateriawsService) {}
   tablet: RTablet = new RTablet();
   docente:DocenteWS = new DocenteWS();
   materia:MateriaWS = new MateriaWS();
@@ -39,20 +39,19 @@ export class DevolverPrestamoPage implements OnInit {
   buscarEstTablet(){
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
-        console.log(this.estudiantes);
+
     });
 
   }
   guardarDatos(): void{
     this.tabletWS.actualizarTabletR(this.tablet).subscribe(data=>{
-      console.log("----------------------------------")
-      console.log(data)
+
     })
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: 'Docente Actualizado',
-      
+      heightAuto: false,
       timer:8500
     })
 

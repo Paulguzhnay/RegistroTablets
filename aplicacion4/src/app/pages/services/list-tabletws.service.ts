@@ -9,7 +9,7 @@ import { RTablet } from 'src/app/domain/RegTablet';
   providedIn: 'root'
 })
 export class ListTabletwsService {
-  
+
   ta: any;
 
   constructor(private http: HttpClient) { }
@@ -18,18 +18,17 @@ export class ListTabletwsService {
 
     let uri="http://localhost:8080/Aplicacion/rs/contactos/Tablets"
     let url=uri
-    console.log(url)
+
     return this.http.get<any>(url);
 
   }
   registrarTablet(tablet:Tablet):Observable<any>{
     let url="http://localhost:8080/Aplicacion/rs/contactos/RegistroTablet";
-    console.log(url)
-    console.log(tablet)
+
     return this.http.post<any>(url,tablet);
   }
 
- 
+
 
   update(tablet:Tablet){
     let url = "http://localhost:8080/Aplicacion/rs/contactos/actualizarTablet";
@@ -40,7 +39,7 @@ export class ListTabletwsService {
 
     let uri="http://localhost:8080/Aplicacion/rs/contactos/BuscarTablet?id="
    let url=uri+user
-   console.log(url)
+
    return this.http.get<Tablet>(url);
  }
 
@@ -48,32 +47,32 @@ export class ListTabletwsService {
 
   let uri="http://localhost:8080/Aplicacion/rs/contactos/borrarTablet?id="
  let url=uri+user
- console.log(url)
+
  return this.http.delete(url);
   }
   buscarEst(user:number):Observable<Tablet>{
 
     let uri="http://localhost:8080/Aplicacion/rs/contactos/estudiantesT?id="
     let url=uri+user
-    console.log(url)
+
     return this.http.get<Tablet>(url);
  }
-  
+
  insertarTabletR(tabletR:RTablet):Observable<any>{
   let url="http://localhost:8080/Aplicacion/rs/contactos/InsertarTR";
-  console.log(url)
+
   return this.http.post<any>(url,tabletR);
 }
 actualizarTabletR(tabletR:RTablet):Observable<any>{
   let url="http://localhost:8080/Aplicacion/rs/contactos/actualizarPrestamo";
-  console.log(tabletR)
+
   return this.http.post<any>(url,tabletR);
 }
 getTabletPrestamo(){
 
   let url="http://localhost:8080/Aplicacion/rs/contactos/verficarTabletsPrestadas"
-  
-  console.log(url)
+
+
   return this.http.get<any>(url);
 
 }
@@ -81,29 +80,28 @@ getTabletPrestamo(){
 verificarTablet(codigo: String): Observable<Tablet>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarTablet?codigo="
   let url=uri+codigo
-  console.log(codigo)
-  console.log(url)
+
   return this.http.get<Tablet>(url);
-  
+
 }
 //----------
 listTabletPrestamo(id:number) : Observable<RTablet>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/listTabletsVerificadas?id="
   let url=uri+id
-  console.log(url)
+
   return this.http.get<RTablet>(url);
 }
 
 //---------------------------------------
 verificarTabletEst(codigo: number, nombreT: String): Observable<any>{
   let url="http://localhost:8080/Aplicacion/rs/contactos/verificarTabletEst?id="+codigo+"&nombreT="+nombreT;
-  console.log(url)
+
   return this.http.get<Tablet>(url);
 }
 verificarTabRegistrado (nombre: String):Observable<any>{
   let uri="http://localhost:8080/Aplicacion/rs/contactos/verificarTabRegistrado?nombre="+nombre
   let url=uri
-  console.log("URL",url)
+  
   return this.http.get<any>(url);
 }
 

@@ -19,7 +19,7 @@ export class InsertTabletsPage implements OnInit {
   guardarD(){
 
     if (this.TabletGrupo.nombre==""||this.TabletGrupo.laboratorio==""||this.TabletGrupo.codigo=="") {
-      
+
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -50,15 +50,15 @@ export class InsertTabletsPage implements OnInit {
             heightAuto: false,
             timer: 1500
           })
-    
+
         }
 
       })
       this.TabletGrupo.codigo=''
       this.TabletGrupo.laboratorio=''
       this.TabletGrupo.nombre=''
-      
-    } 
+
+    }
   }
 
   escanerActivo = false;
@@ -79,7 +79,7 @@ export class InsertTabletsPage implements OnInit {
   }
 
   async escanear(){
-    console.log("Escanear");
+
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'enviroment'}
     });
@@ -89,7 +89,7 @@ export class InsertTabletsPage implements OnInit {
     this.loading = await this.loadingCtrl.create({});
     await this.loading.present();
     requestAnimationFrame(this.escanearCodigo.bind(this));
-    
+
   }
 
   async escanearCodigo(){
@@ -107,7 +107,7 @@ export class InsertTabletsPage implements OnInit {
       this.canvasContext.drawImage(this.videoElements, 0, 0, this.canvasElements.width, this.canvasElements.height);
 
       const imageData = this.canvasContext.getImageData(0, 0, this.canvasElements.width, this.canvasElements.height);
-      
+
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
@@ -145,12 +145,12 @@ export class InsertTabletsPage implements OnInit {
   captureImage() {
     this.fileinput?.nativeElement.click();
   }
-   
+
   handleFile(event: any) {
     let file: any = <HTMLInputElement>event.target.files
     if (!file?.length) { return; }
     file = file[0];
-   
+
     var img = new Image();
     img.onload = () => {
 
@@ -159,7 +159,7 @@ export class InsertTabletsPage implements OnInit {
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
-   
+
       if (code) {
         this.resultadoEscaner = code.data;
         this.visualizarQrToast();
@@ -171,39 +171,37 @@ export class InsertTabletsPage implements OnInit {
   /*  buscarEstTablet(){
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
-        console.log(this.estudiantes);
-    });*/ 
+
+    });*/
 
   verificar(){
     let codigo = this.resultadoEscaner.split("\n");
-    console.log(codigo.length);
+
 
     let corte = codigo[0].split("\n");
-    console.log("***",corte[0].length)
-    console.log(codigo[0].length);
-    console.log(codigo[1]);
+
     if (codigo.length == 3){
       let codigoTablet = codigo[2].split(" ");
-      console.log(codigoTablet[1]);
+
       //this.TabletGrupo.nombre = codigo[0];
       if(codigo[0].length==10){
-      
-        console.log("HOLA 10")
+
+
         var nomC = codigo[0];
-        console.log("///",nomC.substring(0,9).length);
-        this.TabletGrupo.nombre = nomC.substring(0,9);      
+
+        this.TabletGrupo.nombre = nomC.substring(0,9);
         this.TabletGrupo.laboratorio = codigo[1];
         this.TabletGrupo.codigo = codigoTablet[1];
-    
-        
+
+
       }else if(codigo[0].length==9){
-        console.log("HOLA 9")
+
         var nomC = codigo[0];
-        console.log("///",nomC.substring(0,8).length);
-        this.TabletGrupo.nombre = nomC.substring(0,8);      
+       
+        this.TabletGrupo.nombre = nomC.substring(0,8);
         this.TabletGrupo.laboratorio = codigo[1];
         this.TabletGrupo.codigo = codigoTablet[1];
-    
+
       }
 
 

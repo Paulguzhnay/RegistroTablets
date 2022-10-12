@@ -30,22 +30,22 @@ export class ListarEstudiantesPage implements OnInit {
 
   eliminar(id: Number){
     if (window.confirm('¿Estás seguro de eliminar estudiante?')) {
-     
+
 
       //this.estudianteService.eliminart(id).subscribe();
       //window.location.reload();
-    
+
     ////////////////////////////////////////////////////////////////////
     this.estudianteService.estudiantesRegistroTablet(id).subscribe(data=>{
       this.registroU = data;
 
       let dimension = this.registroU.length
 
-      console.log(this.estudiantePrueba)
+
       let i = 0;
- 
+
       while(i < dimension){
-              
+
             this.datosU.estudiante = this.estudiantePrueba;
 
             this.datosU.id = this.registroU[i].id;
@@ -53,24 +53,23 @@ export class ListarEstudiantesPage implements OnInit {
             this.datosU.estado=this.registroU[i].estado;
             this.datosU.tablet=this.registroU[i].tablet;
 
-            console.log("Iteracion ",i)
-            console.log(this.datosU)
+            
             this.estudianteService.updateR(this.datosU);
-         
+
 
             i+=1;
       }
 
     });
-      
 
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     }
   }
 
