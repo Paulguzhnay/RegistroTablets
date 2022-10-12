@@ -26,7 +26,7 @@ export class IngresarMateriaPage implements OnInit {
 
 
       if (this.materia.nombre==""||this.materia.docente.id==0) {
-        
+
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -35,7 +35,7 @@ export class IngresarMateriaPage implements OnInit {
           timer:8500
 
         })
-      } 
+      }
       else {
         this.materiaWS.verificarMateria(this.materia.nombre,this.materia.docente.id).subscribe(dataV=>{
           if(dataV==true){
@@ -45,12 +45,12 @@ export class IngresarMateriaPage implements OnInit {
               text: 'Materia ya registrada',
               heightAuto: false,
               timer:8500
-    
-            })  
+
+            })
           }else{
             this.materiaWS.registrarMateria(this.materia).subscribe(data=>{
-              console.log(data)
-            })   
+
+            })
               Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -63,18 +63,17 @@ export class IngresarMateriaPage implements OnInit {
         })
 
         this.materia.nombre=''
-        this.materia.docente.id=0      
+        this.materia.docente.id=0
       }
-    
+
     }
     cargarMateria(): void{
       this.materias = this.materiaWS.getMateria();
     }
-  
+
     cargarDocentes(): void{
       this.docentes = this.materiaWS.getDocentes();
-      console.log("Hola");
-      console.log("Hola2"+this.materiaWS.getDocentes());
+      
     }
-  
+
 }

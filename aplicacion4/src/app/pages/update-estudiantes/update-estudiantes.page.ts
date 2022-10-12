@@ -26,7 +26,7 @@ export class UpdateEstudiantesPage implements OnInit {
 
   ngOnInit(): void {
     let id = this._route.snapshot.paramMap.get('id');
-    console.log(id)
+
     this.id = `${id}`
     this.id1= Number(this.id)
     this.estudiante.id= Number(this.id)
@@ -43,19 +43,19 @@ export class UpdateEstudiantesPage implements OnInit {
 
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
-    console.log("Hola");
-    console.log("Hola2"+this.docenteWS.getMaterias());
+
   }
 
   guardarDatos(): void{
     this.estudianteService.update(this.estudiante).subscribe(data=>{
-      console.log(data)
+
     })
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: 'Estudiante Actualizado',
       showConfirmButton: false,
+      heightAuto: false,
       timer:9500
     })
 

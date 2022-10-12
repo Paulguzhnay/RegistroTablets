@@ -14,8 +14,8 @@ export class RegistrarUsuarioPage implements OnInit {
   }
   guardar(){
     this.usuarioWS.registrarUsuario(this.usuario).subscribe(data=>{
-      console.log(data)
       
+
     })
     this.usuario.apellido="";
       this.usuario.nombre="";

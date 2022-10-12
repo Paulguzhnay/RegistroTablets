@@ -21,13 +21,13 @@ export class UpdateDocentePage implements OnInit {
   materias:any;
 
   constructor(private _route: ActivatedRoute,private docenteWS: DocenteswsService) { }
-  
+
   id: string="";
   id1: number=0;
 
   ngOnInit(): void {
     let id = this._route.snapshot.paramMap.get('id');
-    console.log(id)
+
     this.id = `${id}`
     this.id1= Number(this.id)
     this.docente.id= Number(this.id)
@@ -43,13 +43,14 @@ export class UpdateDocentePage implements OnInit {
   }
   guardarDatos(): void{
     this.docenteWS.update(this.docente).subscribe(data=>{
-      console.log(data)
+
     })
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: 'Docente Actualizado',
       showConfirmButton: false,
+      heightAuto: false,
       timer:9500
     })
 
@@ -58,8 +59,7 @@ export class UpdateDocentePage implements OnInit {
 
   cargarMaterias(): void{
     this.materias = this.docenteWS.getMaterias();
-    console.log("Hola");
-    console.log("Hola2"+this.docenteWS.getMaterias());
+
   }
 
 

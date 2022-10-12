@@ -12,7 +12,7 @@ export class UpdateTabletsPage implements OnInit {
 
   TabletGrupo:Tablet=new Tablet;
   TabletGrupo2:Tablet=new Tablet;
-  
+
   constructor(private TabletService: ListTabletwsService, private _route: ActivatedRoute) { }
 
    ide: string=""
@@ -21,7 +21,7 @@ export class UpdateTabletsPage implements OnInit {
 
   ngOnInit(): void {
     let id = this._route.snapshot.paramMap.get('id');
-    console.log(id)
+
 
     this.ide = `${id}`
     this.ide1==Number(this.ide)
@@ -32,13 +32,14 @@ export class UpdateTabletsPage implements OnInit {
   guardarD(){
 
     this.TabletService.update(this.TabletGrupo).subscribe(data=>{
-      console.log(data)
+
     })
     Swal.fire({
       position: 'center',
       icon: 'success',
       title: 'La tablet ha sido actualizada exitosamente',
       showConfirmButton: false,
+      heightAuto: false,
       timer:9500
     })
 

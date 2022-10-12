@@ -12,10 +12,10 @@ export class ListTabletsPage implements OnInit {
   constructor(private TabletService: ListTabletwsService) { }
 
   @Input() dep:any;
-  
+
   ngOnInit(): void {
 
-    console.log("ngOnInit")
+    
     this.cargarTablets();
   }
 
@@ -28,9 +28,9 @@ export class ListTabletsPage implements OnInit {
     if (window.confirm('¿Estas seguro de querer borrar esta tablet?')) {
       this.TabletService.borrarTablet(id).subscribe();
       window.location.reload();
-      
+
     }
-    
+
 
 
   }

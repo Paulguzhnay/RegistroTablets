@@ -20,11 +20,11 @@ export class ListarMateriaPage implements OnInit {
   }
   guardarDatos(){
     this.materiaService.update(this.materia).subscribe(data => {
-      console.log(data);
+
     });
-    console.log(this.materia);
+
     this.cargarMateria;
-    this._document.defaultView?.location.reload(); 
+    this._document.defaultView?.location.reload();
   }
   cargarMateria(){
     this.materias = this.materiaService.getMateria();
@@ -34,7 +34,7 @@ export class ListarMateriaPage implements OnInit {
     if (window.confirm('¿Estas seguro de querer borrar esta tablet?')) {
       this.materiaService.borrarMateria(id).subscribe();
       window.location.reload();
-      
+
     }
 
 }

@@ -18,14 +18,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registrar-prestamo.page.scss'],
 })
 export class RegistrarPrestamoPage{
-  constructor(private toasstCtrl: ToastController, 
+  constructor(private toasstCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private tabletWS: ListTabletwsService,
     private docenteWS: DocenteswsService,
     private materiaWS: MateriawsService,
     private TabletService: ListTabletwsService,
-    ) {} 
-  
+    ) {}
+
   tablet: RTablet = new RTablet();
   tablet2: any;
   docente:DocenteWS = new DocenteWS();
@@ -52,28 +52,26 @@ export class RegistrarPrestamoPage{
   cargarTablets(){
     this.tablets=this.TabletService.getTablet();
   }
-  
+
   buscarEstTablet(){
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
-        console.log(this.estudiantes);
+
     });
 
   }
   guardarRT(){
-    console.log(this.tablet)
+
     this.tablet.tablet = this.tablet2;
-    //console.log(this.tabletWS.verificarTabletEst(this.tablet.estudiante.id,this.tablet.tablet.nombre))
-    console.log(this.tablet.estudiante.id)
-    console.log(this.tablet.tablet.nombre)
+    
+
     this.tabletWS.verificarTabletEst(this.tablet.estudiante.id,this.tablet.tablet.nombre).subscribe(data1=>{
-      console.log(data1)
+
 
       //-----------
 if(data1==true){
   this.tabletWS.insertarTabletR(this.tablet).subscribe(data=>{
-    console.log(data)
-    console.log("-----------")
+
       if(data==true){
         Swal.fire({
           position: 'center',
@@ -92,7 +90,7 @@ if(data1==true){
         this.tablet.tablet.id=0;
 
       }
-  }) 
+  })
 }else{
   Swal.fire({
     position: 'center',
@@ -103,12 +101,12 @@ if(data1==true){
     timer: 1500
   })
 }
- 
+
     })
 
-    
 
-   
+
+
   }
 
   escanerActivo = false;
@@ -129,7 +127,7 @@ if(data1==true){
   }
 
   async escanear(){
-    console.log("Escanear");
+
     const stream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'enviroment'}
     });
@@ -139,7 +137,7 @@ if(data1==true){
     this.loading = await this.loadingCtrl.create({});
     await this.loading.present();
     requestAnimationFrame(this.escanearCodigo.bind(this));
-    
+
   }
 
   async escanearCodigo(){
@@ -156,11 +154,11 @@ if(data1==true){
       this.canvasContext.drawImage(this.videoElements, 0, 0, this.canvasElements.width, this.canvasElements.height);
 
       const imageData = this.canvasContext.getImageData(0, 0, this.canvasElements.width, this.canvasElements.height);
-      
+
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
-      console.log('code: ', code);
+
 
       if(code){
         this.escanerActivo = false;
@@ -195,12 +193,12 @@ if(data1==true){
   captureImage() {
     this.fileinput?.nativeElement.click();
   }
-   
+
   handleFile(event: any) {
     let file: any = <HTMLInputElement>event.target.files
     if (!file?.length) { return; }
     file = file[0];
-   
+
     var img = new Image();
     img.onload = () => {
 
@@ -209,7 +207,7 @@ if(data1==true){
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: 'dontInvert'
       });
-   
+
       if (code) {
         this.resultadoEscaner = code.data;
         this.visualizarQrToast();
@@ -221,8 +219,8 @@ if(data1==true){
   /*  buscarEstTablet(){
     this.tabletWS.buscarEst(this.tablet.materia.id).subscribe(data=>{
         this.estudiantes = data;
-        console.log(this.estudiantes);
-    });*/ 
+
+    });*/
 
   verificar(){
     let codigo = this.resultadoEscaner.split("\n");
@@ -230,7 +228,7 @@ if(data1==true){
       this.tablet.tablet.nombre = codigo[0];
       this.tabletWS.verificarTablet(codigo[0]).subscribe(data=>{
         this.tablet2=data;
-        console.log(data);
+
         });
     }else{
       Swal.fire({
